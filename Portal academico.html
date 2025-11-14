@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COLEGIO EL DIVINO SALVADOR DE A.M.E.N - Sistema de Matrícula</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Máscara de entrada -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <!-- QR Code Generator -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    /* ======== ENCABEZADO ======== */
+    header { 
+        background-color: #fefeff; 
+      border-bottom: 8px solid #18458A;  
+        position: relative;
+        z-index: 1000;
+        padding: 20px 0;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .navbar-brand img { 
+        height: 50px;
+        width: auto;
+    }
+
+    .navbar-brand span {
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    /* Navbar links */
+    .navbar-nav .nav-link {
+        font-weight: 500;
+        color: #333 !important;
+        padding: 0.5rem 1rem;
+    }
+    .navbar-nav .nav-link:hover {
+        color: #18458A !important;
+    }
+
+    /* Toggler */
+    .navbar-toggler { 
+        border: none; 
+        padding: 4px 8px;
+        margin-left: auto;
+    }
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    /* Estilos para móviles */
+    @media (max-width: 767.98px) {
+        header .container {
+            padding: 0 15px;
+        }
+        
+        .navbar-brand {
+            flex-grow: 1;
+            max-width: calc(100% - 60px);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        /* OCULTAR NOMBRE DEL COLEGIO EN MÓVIL */
+        .navbar-brand span {
+            display: none;
+        }
+        
+        .navbar-toggler {
+            order: 2;
+            margin-left: auto;
+        }
+        
+        .navbar-collapse {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgb(0, 0, 0);
+            padding: 2rem;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+            z-index: 1040;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .navbar-collapse.show {
+            transform: translateX(0);
+        }
+        
+        .navbar-nav {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .navbar-nav .nav-item {
+            margin: 15px 0;
+        }
+        
+        .navbar-nav .nav-link {
+            font-size: 1.5rem;
+            color: #fff !important;
+            padding: 10px 0;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #18458A !important;
+        }
+        
+        /* Botón de cierre para móviles */
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1050;
+        }
+    }
+
+    /* Estilos para escritorio */
+    @media (min-width: 768px) {
+        .navbar-collapse {
+            display: flex !important;
+        }
+        
+        .close-menu {
+            display: none;
+        }
+        
+        .navbar-brand span {
+            font-size: 1.5rem;
+            display: inline;
+        }
+    }
+
+    /* ======== SISTEMA ACADÉMICO ======== */
+    .sidebar { 
+        min-width: 250px; 
+        max-width: 280px; 
+        background: #fff; 
+        border-right: 1px solid #e6e6e6; 
+        min-height: calc(100vh - 80px);
+         border-bottom: 8px solid #18458A; 
+    }
+    .sidebar .nav-link { color: #333; }
+    .sidebar .nav-link.active { background: #f1f5f9; font-weight: 600; }
+    .brand { padding: 1rem; border-bottom: 1px solid #e6e6e6; }
+    .main { padding: 1.5rem; }
+    .hidden { display: none !important; }
+    .rounded-card { 
+        border-radius: 12px; 
+        box-shadow: 0 1px 6px rgba(0,0,0,0.05); 
+        background: #fff; 
+        padding: 1rem; 
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Responsive: sidebar colapsa en pantallas pequeñas */
+    @media (max-width: 991px) {
+        .sidebar { 
+            position: relative; 
+            width: 100%; 
+            border-right: none; 
+            border-bottom: 1px solid #3f3f3f;
+            min-height: auto;
+        }
+    }
+
+    /* PIE DE PÁGINA */
+    footer { background-color: #000000; color: #fff; padding: 40px 20px; margin-top: 2rem; }
+    footer h5 { font-weight: bold; margin-bottom: 15px; }
+    footer a { color: #fff; text-decoration: none; }
+    footer a:hover { color: #18458A; }
+    .social-icons a { font-size: 1.5rem; margin: 0 10px; color: #fff; transition: color 0.3s; }
+    .social-icons a:hover { color: #18458A; }
+
+    /* Roles badges */
+    .badge-role-admin { background-color: #129404; }
+    .badge-role-assistant { background-color: #18458A }
+    
+    /* Mensajes de error */
+    .error-message {
+      color: #dc3545;
+      font-size: 0.875em;
+      margin-top: 0.25rem;
+    }
+
+    /* Modal de login personalizado */
+    .login-modal .modal-dialog {
+      max-width: 400px;
+    }
+    .login-modal .modal-content {
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .login-modal .modal-header {
+      border-bottom: 1px solid #e9ecef;
+      padding: 1.5rem 1.5rem 0.5rem;
+    }
+    .login-modal .modal-body {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+
+    /* Solución para backdrop persistente */
+    .modal-backdrop {
+      z-index: 1040;
+    }
+    .login-modal {
+      z-index: 1050;
+    }
+
+    /* Estilos para formulario de matrícula en pasos */
+    .step-progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .step-progress::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #e9ecef;
+      z-index: 1;
+    }
+    
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      border: 2px solid #e9ecef;
+    }
+    
+    .step.active .step-circle {
+      background-color: #0d6efd;
+      color: rgb(33, 32, 32);
+      border-color: #0d6efd;
+    }
+    
+    .step.completed .step-circle {
+      background-color: #198754;
+      color: white;
+      border-color: #198754;
+    }
+    
+    .step-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .form-step {
+      display: none;
+    }
+    
+    .form-step.active {
+      display: block;
+    }
+    
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    /* Comprobante de matrícula */
+    .comprobante {
+      border: 2px solid ;
+      color: #000000;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #ffffff;
+      margin-bottom: 20px;
+    }
+    
+    .comprobante-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ffffff93;
+      padding-bottom: 15px;
+    }
+    
+    .comprobante-qr {
+      text-align: center;
+      margin: 15px 0;
+      color: #000000;
+    }
+    
+    .comprobante-enlace {
+      background-color: #595959;
+      padding: 10px;
+      border-radius: 5px;
+      word-break: break-all;
+      font-size: 0.9rem;
+    }
+    
+    /* Estilos para la vista pública de verificación */
+    .public-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .public-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ffffff;
+    }
+    
+    .verification-result {
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .verification-success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    
+    .verification-error {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-md p-0">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo Actual.png" alt="Colegio El Divino Salvador de A.M.E.N">
+        <span>Colegio El Divino Salvador de A.M.E.N</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="menuNav">
+        <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+          <li class="nav-item"><a href="noticias.html" class="nav-link">Noticias</a></li>
+          <li class="nav-item"><a href="verificar-matriculas.html" class="nav-link">Verificar Matrícula</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Modal para login -->
+<div class="modal fade login-modal" id="loginModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title w-100 text-center">Iniciar Sesión</h5>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="u-rol" class="form-label">Rol</label>
+            <select id="u-rol" class="form-select" required>
+              <option value="">Seleccione un rol</option>
+              <option value="assistant">Asistente</option>
+              <option value="admin">Administrador</option>
+              <option value="director">Director</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="login-username" class="form-label">Usuario</label>
+            <input type="text" id="login-username" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="login-password" class="form-label">Contraseña</label>
+            <input type="password" id="login-password" class="form-control" required>
+          </div>
+
+          <div class="d-grid mb-3">
+            <button class="btn btn-primary" type="submit">Entrar al Sistema</button>
+          </div>
+
+          <div class="text-muted small text-center">
+            <strong>Admin:</strong> admin / admin123<br>
+            <strong>Asistente:</strong> asistente / asistente123
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<main>
+  <!-- ========= Contenedor principal del sistema académico ========== -->
+  <div class="container-fluid" id="main-content">
+    <div class="row">
+      <!-- Sidebar / izquierda -->
+      <nav id="sidebar" class="col-lg-3 col-xl-2 sidebar p-0">
+        <div class="brand d-flex align-items-center">
+          <div>
+            <h5 class="mb-0">Sistema de Matrícula</h5>
+            <small class="text-muted">Colegio  el divino salvador de A.M.E.N</small>
+          </div>
+        </div>
+
+        <!-- Menú (se muestra solo cuando hay sesión) -->
+        <div id="menu-section" class="p-2">
+          <ul class="nav flex-column">
+            <li class="nav-item role-admin role-assistant"><a class="nav-link active" href="#" data-view="form-matricula"><i class="fa fa-user-plus me-2"></i>Formulario de Matrícula</a></li>
+            <li class="nav-item role-admin role-assistant"><a class="nav-link" href="#" data-view="ver-matriculas"><i class="fa fa-list me-2"></i>Ver Matrículas</a></li>
+            <li class="nav-item role-admin hidden"><a class="nav-link" href="#" data-view="agregar-usuario"><i class="fa fa-user-plus me-2"></i>Agregar Usuarios</a></li>
+            <li class="nav-item role-admin hidden"><a class="nav-link" href="#" data-view="ver-usuarios"><i class="fa fa-users me-2"></i>Ver usuarios</a></li>
+            <li class="nav-item"><hr></li>
+            <li class="nav-item role-admin role-assistant">
+              <button id="exportMatriculasBtn" class="btn btn-outline-secondary btn-sm w-100 mb-2">Exportar Matrículas (.json)</button>
+              <button id="exportUsersBtn" class="btn btn-outline-secondary btn-sm w-100 mb-2">Exportar Usuarios (.json)</button>
+              
+              <!-- Etiqueta agregada para importar matrículas -->
+              <label for="importMatriculasFile" class="form-label small mt-2">Importar datos de matrícula</label>
+              <input type="file" id="importMatriculasFile" accept=".json" class="form-control form-control-sm mb-2">
+              
+              <!-- Etiqueta agregada para importar usuarios -->
+              <label for="importUsersFile" class="form-label small mt-2">Importar usuarios</label>
+              <input type="file" id="importUsersFile" accept=".json" class="form-control form-control-sm mb-2">
+            </li>
+            <li class="nav-item">
+              <button id="logoutBtn" class="btn btn-danger btn-sm w-100">Cerrar sesión</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main / derecha -->
+      <main class="col-lg-9 col-xl-10 main">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h3 id="page-title" class="mb-0">Formulario de Matrícula</h3>
+            <small id="page-subtitle" class="text-muted">Sistema de gestión de matrículas</small>
+          </div>
+          <div>
+            <span id="user-badge" class="badge bg-secondary">Usuario</span>
+            <span id="role-badge" class="badge ms-1">Rol</span>
+          </div>
+        </div>
+
+        <!-- Contenido: varias vistas; se ocultan/ muestran según el menú -->
+        <div id="views">
+
+          <!-- 1) Formulario de Matrícula -->
+          <section id="view-form-matricula" class="view rounded-card">
+            <h5>Formulario de Matrícula</h5>
+            <p class="text-muted small">Complete los datos del estudiante en los siguientes pasos.</p>
+
+            <!-- Indicador de pasos -->
+            <div class="step-progress">
+              <div class="step active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Datos Personales</div>
+              </div>
+              <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Datos del Tutor</div>
+              </div>
+              <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Datos Académicos</div>
+              </div>
+            </div>
+
+            <form id="matriculaForm">
+              <!-- Paso 1: Datos Personales -->
+              <div class="form-step active" id="step-1">
+                <h6 class="mb-3">Datos Personales del Estudiante</h6>
+                
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Primer Nombre *</label>
+                    <input type="text" id="p-primer-nombre" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Segundo Nombre</label>
+                    <input type="text" id="p-segundo-nombre" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Primer Apellido *</label>
+                    <input type="text" id="p-primer-apellido" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Segundo Apellido</label>
+                    <input type="text" id="p-segundo-apellido" class="form-control">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Fecha de Nacimiento *</label>
+                    <input type="date" id="p-fecha-nacimiento" class="form-control" required>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Edad</label>
+                    <input type="text" id="p-edad" class="form-control" readonly>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Número de Cédula o fecha de Nacimiento *</label>
+                    <input type="text" id="p-cedula" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Dirección Domiciliar *</label>
+                    <input type="text" id="p-direccion" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Nacionalidad *</label>
+                    <input type="text" id="p-nacionalidad" class="form-control" value="Nicaragüense" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Número de Teléfono *</label>
+                    <input type="tel" id="p-telefono" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Correo Electrónico</label>
+                    <input type="email" id="p-correo" class="form-control">
+                  </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                  <div></div> <!-- Espacio vacío para alinear a la derecha -->
+                  <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
+                </div>
+              </div>
+
+              <!-- Paso 2: Datos del Tutor -->
+              <div class="form-step" id="step-2">
+                <h6 class="mb-3">Datos del Tutor</h6>
+                
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nombres *</label>
+                    <input type="text" id="t-nombres" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Apellidos *</label>
+                    <input type="text" id="t-apellidos" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Parentesco *</label>
+                    <select id="t-parentesco" class="form-control" required>
+                      <option value="">Seleccione...</option>
+                      <option value="Madre">Madre</option>
+                      <option value="Padre">Padre</option>
+                      <option value="Tutor legal">Tutor legal</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Teléfono *</label>
+                    <input type="tel" id="t-telefono" class="form-control" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Dirección Domiciliar *</label>
+                    <input type="text" id="t-direccion" class="form-control" required>
+                  </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                  <button type="button" class="btn btn-secondary prev-step" data-prev="1">Anterior</button>
+                  <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
+                </div>
+              </div>
+
+              <!-- Paso 3: Datos Académicos -->
+              <div class="form-step" id="step-3">
+                <h6 class="mb-3">Datos Académicos</h6>
+                
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label class="form-label">Año que matricula *</label>
+                    <select id="a-ano" class="form-control" required>
+                      <option value="">Seleccione...</option>
+                      <option value="Primer año">Primer año</option>
+                      <option value="Segundo año">Segundo año</option>
+                      <option value="Tercer año">Tercer año</option>
+                      <option value="Cuarto año">Cuarto año</option>
+                      <option value="Quinto año">Quinto año</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Grupo *</label>
+                    <select id="a-grupo" class="form-control" required>
+                      <option value="">Seleccione...</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Turno *</label>
+                    <select id="a-turno" class="form-control" required>
+                      <option value="">Seleccione...</option>
+                      <option value="Matutino">Matutino</option>
+                      <option value="Vespertino">Vespertino</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="navigation-buttons mt-4">
+                  <button type="button" class="btn btn-secondary prev-step" data-prev="2">Anterior</button>
+                  <button class="btn btn-success" type="submit">Completar Matrícula</button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <!-- 2) Ver Matrículas -->
+          <section id="view-ver-matriculas" class="view hidden rounded-card">
+            <h5>Matrículas Registradas</h5>
+            <p class="text-muted small">Listado de estudiantes matriculados. Puede editar o eliminar registros.</p>
+
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="matriculasTable">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Estudiante</th>
+                    <th>Cédula</th>
+                    <th>Teléfono</th>
+                    <th>Año</th>
+                    <th>Grupo</th>
+                    <th>Turno</th>
+                    <th>Tutor</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 3) Agregar Usuarios -->
+          <section id="view-agregar-usuario" class="view hidden rounded-card">
+            <h5>Agregar Usuario</h5>
+            <p class="text-muted small">Cree usuarios que podrán iniciar sesión en el sistema.</p>
+
+            <form id="userAddForm" class="row g-3">
+              <div class="col-md-3">
+                <label class="form-label">Nombres</label>
+                <input type="text" id="u-nombres" class="form-control" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Apellidos</label>
+                <input type="text" id="u-apellidos" class="form-control" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Correo</label>
+                <input type="email" id="u-correo" class="form-control" required>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" id="u-username" class="form-control" required>
+                <div class="error-message hidden" id="username-error">Este usuario ya existe</div>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Rol</label>
+                <select id="u-rol" class="form-control" required>
+                  <option value="assistant">Asistente</option>
+                  <option value="admin">Administrador</option>
+                  <option value="director">Director</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Contraseña</label>
+                <input type="password" id="u-password" class="form-control" required>
+              </div>
+
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Agregar usuario</button>
+                <button class="btn btn-outline-secondary" id="clearUserForm" type="button">Limpiar</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- 4) Ver usuarios -->
+          <section id="view-ver-usuarios" class="view hidden rounded-card">
+            <h5>Usuarios registrados</h5>
+            <p class="text-muted small">Revise, actualice o elimine usuarios.</p>
+
+            <div class="table-responsive">
+              <table class="table table-sm table-hover" id="usersTable">
+                <thead class="table-light">
+                  <tr><th>Nombre</th><th>Apellidos</th><th>Correo</th><th>Usuario</th><th>Rol</th><th>Acciones</th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+        </div> <!-- fin views -->
+      </main>
+    </div>
+  </div>
+</main>
+
+<!-- PIE DE PÁGINA -->
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/https://www.instagram.com/divinosalvadorde/" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@https://www.tiktok.com/@divino.salvador.a0?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
+
+
+<!-- Modal: Editar Usuario -->
+<div class="modal fade" id="modalEditUser" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="editUserForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-user-id">
+        <div class="mb-2">
+          <label class="form-label">Nombres</label>
+          <input type="text" id="edit-u-nombres" class="form-control" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Apellidos</label>
+          <input type="text" id="edit-u-apellidos" class="form-control" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Correo</label>
+          <input type="email" id="edit-u-correo" class="form-control" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Nombre de usuario</label>
+          <input type="text" id="edit-u-username" class="form-control" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Rol</label>
+          <select id="edit-u-rol" class="form-control" required>
+            <option value="assistant">Asistente</option>
+            <option value="admin">Administrador</option>
+            <option value="director">Director</option>
+          </select>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Contraseña (nuevo)</label>
+          <input type="password" id="edit-u-password" class="form-control">
+          <small class="text-muted">Dejar vacío para conservar la contraseña actual.</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Editar Matrícula -->
+<div class="modal fade" id="modalEditMatricula" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form id="editMatriculaForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Matrícula</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-matricula-id">
+        
+        <h6 class="mb-3">Datos Personales del Estudiante</h6>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Primer Nombre *</label>
+            <input type="text" id="edit-p-primer-nombre" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Segundo Nombre</label>
+            <input type="text" id="edit-p-segundo-nombre" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Primer Apellido *</label>
+            <input type="text" id="edit-p-primer-apellido" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Segundo Apellido</label>
+            <input type="text" id="edit-p-segundo-apellido" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Fecha de Nacimiento *</label>
+            <input type="date" id="edit-p-fecha-nacimiento" class="form-control" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Edad</label>
+            <input type="text" id="edit-p-edad" class="form-control" readonly>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Número de Cédula *</label>
+            <input type="text" id="edit-p-cedula" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Dirección Domiciliar *</label>
+            <input type="text" id="edit-p-direccion" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Nacionalidad *</label>
+            <input type="text" id="edit-p-nacionalidad" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Número de Teléfono *</label>
+            <input type="tel" id="edit-p-telefono" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Correo Electrónico</label>
+            <input type="email" id="edit-p-correo" class="form-control">
+          </div>
+        </div>
+        
+        <h6 class="mb-3">Datos del Tutor</h6>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Nombres *</label>
+            <input type="text" id="edit-t-nombres" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Apellidos *</label>
+            <input type="text" id="edit-t-apellidos" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Parentesco *</label>
+            <select id="edit-t-parentesco" class="form-control" required>
+              <option value="">Seleccione...</option>
+              <option value="Madre">Madre</option>
+              <option value="Padre">Padre</option>
+              <option value="Tutor legal">Tutor legal</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Teléfono *</label>
+            <input type="tel" id="edit-t-telefono" class="form-control" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Dirección Domiciliar *</label>
+            <input type="text" id="edit-t-direccion" class="form-control" required>
+          </div>
+        </div>
+        
+        <h6 class="mb-3">Datos Académicos</h6>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Año que matricula *</label>
+            <select id="edit-a-ano" class="form-control" required>
+              <option value="">Seleccione...</option>
+              <option value="Primer año">Primer año</option>
+              <option value="Segundo año">Segundo año</option>
+              <option value="Tercer año">Tercer año</option>
+              <option value="Cuarto año">Cuarto año</option>
+              <option value="Quinto año">Quinto año</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Grupo *</label>
+            <select id="edit-a-grupo" class="form-control" required>
+              <option value="">Seleccione...</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Turno *</label>
+            <select id="edit-a-turno" class="form-control" required>
+              <option value="">Seleccione...</option>
+              <option value="Matutino">Matutino</option>
+              <option value="Vespertino">Vespertino</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
+        <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Comprobante de Matrícula -->
+<div class="modal fade" id="modalComprobante" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Comprobante de Matrícula</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="comprobante">
+          <div class="comprobante-header">
+            <h4>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</h4>
+            <p class="mb-0">Comprobante Oficial de Matrícula</p>
+            <small class="text-muted">Año Académico 2024</small>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Datos del Estudiante:</h6>
+              <p><strong>Nombre completo:</strong> <span id="comp-nombre"></span></p>
+              <p><strong>Cédula:</strong> <span id="comp-cedula"></span></p>
+              <p><strong>Fecha de Nacimiento:</strong> <span id="comp-fecha-nacimiento"></span></p>
+              <p><strong>Edad:</strong> <span id="comp-edad"></span> años</p>
+              <p><strong>Dirección:</strong> <span id="comp-direccion"></span></p>
+              <p><strong>Teléfono:</strong> <span id="comp-telefono"></span></p>
+              <p><strong>Correo:</strong> <span id="comp-correo"></span></p>
+            </div>
+            <div class="col-md-6">
+              <h6>Datos del Tutor:</h6>
+              <p><strong>Nombre completo:</strong> <span id="comp-tutor-nombre"></span></p>
+              <p><strong>Parentesco:</strong> <span id="comp-tutor-parentesco"></span></p>
+              <p><strong>Teléfono:</strong> <span id="comp-tutor-telefono"></span></p>
+              <p><strong>Dirección:</strong> <span id="comp-tutor-direccion"></span></p>
+              
+              <h6 class="mt-3">Datos Académicos:</h6>
+              <p><strong>Año:</strong> <span id="comp-ano"></span></p>
+              <p><strong>Grupo:</strong> <span id="comp-grupo"></span></p>
+              <p><strong>Turno:</strong> <span id="comp-turno"></span></p>
+            </div>
+          </div>
+          
+          <div class="comprobante-qr">
+            <div id="qr-code" class="mb-2"></div>
+            <small class="text-muted">Código QR para verificación</small>
+          </div>
+          
+          <div class="mt-3">
+            <label class="form-label">Enlace de verificación:</label>
+            <div class="comprobante-enlace">
+              <span id="comp-enlace"></span>
+            </div>
+            <button id="btn-copiar-enlace" class="btn btn-sm btn-outline-primary mt-2">
+              <i class="fas fa-copy me-1"></i> Copiar enlace
+            </button>
+          </div>
+          
+          <div class="mt-4 text-center">
+            <p class="mb-1"><small>Fecha de matrícula: <span id="comp-fecha-matricula"></span></small></p>
+            <p class="mb-0"><small>ID de matrícula: <span id="comp-id"></span></small></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="btn-imprimir-comprobante">
+          <i class="fas fa-print me-1"></i> Imprimir
+        </button>
+        <button type="button" class="btn btn-success" id="btn-enviar-correo">
+          <i class="fas fa-envelope me-1"></i> Enviar por correo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ---------- Lógica JavaScript ---------- -->
+<script>
+/****************************************************************
+ * Sistema de Matrícula - Bachillerato
+ ****************************************************************/
+
+// Constantes
+const LS_USERS = 'sc_users';
+const LS_MATRICULAS = 'sc_matriculas';
+const SESSION_USER = 'sc_session_user';
+const SESSION_ROLE = 'sc_session_role';
+
+// Utilidades
+function generateId() { 
+  return 'id-' + Math.random().toString(36).slice(2, 9) + '-' + Date.now().toString(36);
+}
+
+function readJSON(key) {
+  try {
+    // Primero intentar con sessionStorage (más confiable para compartir)
+    let raw = sessionStorage.getItem(key);
+    let source = 'sessionStorage';
+    
+    // Si no hay en sessionStorage, intentar con localStorage
+    if (!raw) {
+      raw = localStorage.getItem(key);
+      source = 'localStorage';
+    }
+    
+    console.log(`📖 Leyendo ${key} desde ${source}:`, raw ? 'Datos encontrados' : 'Sin datos');
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    console.error('Error reading from storage:', e);
+    return null;
+  }
+}
+
+function writeJSON(key, data) {
+  try {
+    const dataString = JSON.stringify(data, null, 2);
+    
+    // Guardar en AMBOS almacenamientos
+    localStorage.setItem(key, dataString);
+    sessionStorage.setItem(key, dataString);
+    
+    console.log(`💾 Guardado en ambos almacenamientos: ${key}`, data);
+    return true;
+  } catch (e) {
+    console.error('Error writing to storage:', e);
+    return false;
+  }
+}
+
+// Y MODIFICA la función readJSON para que intente ambos:
+function readJSON(key) {
+  try {
+    // Primero intentar con localStorage
+    let raw = localStorage.getItem(key);
+    
+    // Si no hay en localStorage, intentar con sessionStorage
+    if (!raw) {
+      raw = sessionStorage.getItem(key);
+      if (raw) console.log(`📥 Recuperando ${key} desde sessionStorage`);
+    }
+    
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    console.error('Error reading from storage:', e);
+    return null;
+  }
+}
+
+// Inicializar datos
+function ensureSeedData() {
+  console.log('🔧 Inicializando datos del sistema...');
+  
+  // Verificar usuarios
+  if (!readJSON(LS_USERS)) {
+    const users = [
+      { 
+        id: generateId(), 
+        nombres: 'Administrador', 
+        apellidos: 'Sistema', 
+        correo: 'admin@colegiomesias.edu.ni', 
+        username: 'admin', 
+        password: 'admin123',
+        rol: 'admin'
+      },
+      { 
+        id: generateId(), 
+        nombres: 'Asistente', 
+        apellidos: 'Ejemplo', 
+        correo: 'asistente@colegiomesias.edu.ni', 
+        username: 'asistente', 
+        password: 'asistente123',
+        rol: 'assistant'
+      }
+    ];
+    writeJSON(LS_USERS, users);
+    console.log('👥 Usuarios por defecto creados');
+  }
+  
+  // Verificar matrículas - NO crear ejemplo automáticamente
+  if (!readJSON(LS_MATRICULAS)) {
+    writeJSON(LS_MATRICULAS, []);
+    console.log('📚 Estructura de matrículas inicializada (vacía)');
+  }
+  
+  console.log('✅ Inicialización completada');
+}
+
+// Autenticación
+function getCurrentUser() {
+  return sessionStorage.getItem(SESSION_USER);
+}
+
+function getCurrentRole() {
+  return sessionStorage.getItem(SESSION_ROLE);
+}
+
+function setCurrentUser(username, role) {
+  if (username && role) {
+    sessionStorage.setItem(SESSION_USER, username);
+    sessionStorage.setItem(SESSION_ROLE, role);
+  } else {
+    sessionStorage.removeItem(SESSION_USER);
+    sessionStorage.removeItem(SESSION_ROLE);
+  }
+}
+
+function validateCredentials(username, password) {
+  const users = readJSON(LS_USERS) || [];
+  const user = users.find(u => u.username === username && u.password === password);
+  return user || null;
+}
+
+// Navegación
+const views = document.querySelectorAll('.view');
+function showView(viewId) {
+  views.forEach(v => v.classList.add('hidden'));
+  const el = document.getElementById('view-' + viewId);
+  if (el) el.classList.remove('hidden');
+
+  const titleMap = {
+    'form-matricula': 'Formulario de Matrícula',
+    'ver-matriculas': 'Ver Matrículas',
+    'agregar-usuario': 'Agregar usuario',
+    'ver-usuarios': 'Ver usuarios'
+  };
+  document.getElementById('page-title').textContent = titleMap[viewId] || 'Sistema de Matrícula';
+  document.getElementById('page-subtitle').textContent = 'Sistema de gestión de matrículas';
+}
+
+function setupMenuHandlers() {
+  document.querySelectorAll('#menu-section .nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('#menu-section .nav-link').forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      const view = link.getAttribute('data-view');
+      showView(view);
+      if (view === 'ver-matriculas') renderMatriculasTable();
+      if (view === 'ver-usuarios') renderUsersTable();
+    });
+  });
+}
+
+// Cálculo de edad
+function calcularEdad(fechaNacimiento) {
+  const hoy = new Date();
+  const nacimiento = new Date(fechaNacimiento);
+  let edad = hoy.getFullYear() - nacimiento.getFullYear();
+  const mes = hoy.getMonth() - nacimiento.getMonth();
+  
+  if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+    edad--;
+  }
+  
+  return edad;
+}
+
+document.getElementById('p-fecha-nacimiento').addEventListener('change', function() {
+  const edad = calcularEdad(this.value);
+  document.getElementById('p-edad').value = edad > 0 ? edad : '';
+});
+
+document.getElementById('edit-p-fecha-nacimiento').addEventListener('change', function() {
+  const edad = calcularEdad(this.value);
+  document.getElementById('edit-p-edad').value = edad > 0 ? edad : '';
+});
+
+// Formulario de matrícula en pasos
+function setupFormSteps() {
+  // Navegación entre pasos
+  document.querySelectorAll('.next-step').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const currentStep = document.querySelector('.form-step.active');
+      const nextStepId = this.getAttribute('data-next');
+      const nextStep = document.getElementById('step-' + nextStepId);
+      
+      // Validar paso actual antes de avanzar
+      if (validateStep(currentStep.id)) {
+        currentStep.classList.remove('active');
+        nextStep.classList.add('active');
+        
+        // Actualizar indicador de progreso
+        updateStepProgress(currentStep.id.replace('step-', ''), nextStepId);
+      }
+    });
+  });
+  
+  document.querySelectorAll('.prev-step').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const currentStep = document.querySelector('.form-step.active');
+      const prevStepId = this.getAttribute('data-prev');
+      const prevStep = document.getElementById('step-' + prevStepId);
+      
+      currentStep.classList.remove('active');
+      prevStep.classList.add('active');
+      
+      // Actualizar indicador de progreso
+      updateStepProgress(currentStep.id.replace('step-', ''), prevStepId);
+    });
+  });
+}
+
+function validateStep(stepId) {
+  const step = document.getElementById(stepId);
+  const inputs = step.querySelectorAll('input[required], select[required]');
+  
+  for (let input of inputs) {
+    if (!input.value.trim()) {
+      alert('Por favor, complete todos los campos obligatorios marcados con *');
+      input.focus();
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+function updateStepProgress(currentStep, nextStep) {
+  // Actualizar clases de los pasos
+  document.querySelectorAll('.step').forEach(step => {
+    const stepNumber = step.getAttribute('data-step');
+    step.classList.remove('active', 'completed');
+    
+    if (stepNumber === nextStep) {
+      step.classList.add('active');
+    } else if (stepNumber < nextStep) {
+      step.classList.add('completed');
+    }
+  });
+}
+
+// Formulario de matrícula - submit
+document.getElementById('matriculaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Validar todos los pasos antes de enviar
+  if (!validateStep('step-1') || !validateStep('step-2') || !validateStep('step-3')) {
+    alert('Por favor, complete todos los campos obligatorios en todos los pasos');
+    return;
+  }
+  
+  const matriculas = readJSON(LS_MATRICULAS) || [];
+  
+  const nuevaMatricula = {
+    id: generateId(),
+    // Datos personales
+    primerNombre: document.getElementById('p-primer-nombre').value.trim(),
+    segundoNombre: document.getElementById('p-segundo-nombre').value.trim(),
+    primerApellido: document.getElementById('p-primer-apellido').value.trim(),
+    segundoApellido: document.getElementById('p-segundo-apellido').value.trim(),
+    fechaNacimiento: document.getElementById('p-fecha-nacimiento').value,
+    edad: document.getElementById('p-edad').value,
+    cedula: document.getElementById('p-cedula').value.trim(),
+    direccion: document.getElementById('p-direccion').value.trim(),
+    nacionalidad: document.getElementById('p-nacionalidad').value.trim(),
+    telefono: document.getElementById('p-telefono').value.trim(),
+    correo: document.getElementById('p-correo').value.trim(),
+    // Datos del tutor
+    tutorNombres: document.getElementById('t-nombres').value.trim(),
+    tutorApellidos: document.getElementById('t-apellidos').value.trim(),
+    tutorParentesco: document.getElementById('t-parentesco').value,
+    tutorTelefono: document.getElementById('t-telefono').value.trim(),
+    tutorDireccion: document.getElementById('t-direccion').value.trim(),
+    // Datos académicos
+    ano: document.getElementById('a-ano').value,
+    grupo: document.getElementById('a-grupo').value,
+    turno: document.getElementById('a-turno').value,
+    // Fechas
+    fechaMatricula: new Date().toISOString()
+  };
+  
+  matriculas.push(nuevaMatricula);
+  writeJSON(LS_MATRICULAS, matriculas);
+  
+  // Mostrar comprobante
+  mostrarComprobante(nuevaMatricula);
+  
+  // Reiniciar formulario
+  this.reset();
+  document.getElementById('p-edad').value = '';
+  
+  // Volver al primer paso
+  document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+  document.getElementById('step-1').classList.add('active');
+  updateStepProgress('3', '1');
+});
+
+// Mostrar comprobante de matrícula - VERSIÓN COMPLETAMENTE CORREGIDA
+function mostrarComprobante(matricula) {
+  // Llenar datos en el modal
+  document.getElementById('comp-nombre').textContent = 
+    `${matricula.primerNombre} ${matricula.segundoNombre || ''} ${matricula.primerApellido} ${matricula.segundoApellido || ''}`;
+  document.getElementById('comp-cedula').textContent = matricula.cedula;
+  document.getElementById('comp-fecha-nacimiento').textContent = 
+    new Date(matricula.fechaNacimiento).toLocaleDateString('es-ES');
+  document.getElementById('comp-edad').textContent = matricula.edad;
+  document.getElementById('comp-direccion').textContent = matricula.direccion;
+  document.getElementById('comp-telefono').textContent = matricula.telefono;
+  document.getElementById('comp-correo').textContent = matricula.correo || 'No proporcionado';
+  
+  document.getElementById('comp-tutor-nombre').textContent = 
+    `${matricula.tutorNombres} ${matricula.tutorApellidos}`;
+  document.getElementById('comp-tutor-parentesco').textContent = matricula.tutorParentesco;
+  document.getElementById('comp-tutor-telefono').textContent = matricula.tutorTelefono;
+  document.getElementById('comp-tutor-direccion').textContent = matricula.tutorDireccion;
+  
+  document.getElementById('comp-ano').textContent = matricula.ano;
+  document.getElementById('comp-grupo').textContent = matricula.grupo;
+  document.getElementById('comp-turno').textContent = matricula.turno;
+  
+  document.getElementById('comp-fecha-matricula').textContent = 
+    new Date(matricula.fechaMatricula).toLocaleDateString('es-ES');
+  document.getElementById('comp-id').textContent = matricula.id;
+  
+  // Generar enlace de verificación - VERSIÓN CORREGIDA
+  let enlaceVerificacion;
+  try {
+    // Si estamos en un entorno local (file://), usar ruta relativa
+    if (window.location.protocol === 'file:') {
+      enlaceVerificacion = `verificar-matricula.html?verificar-matricula=${matricula.id}`;
+    } else {
+      // Para servidor web, construir URL completa
+      const baseUrl = window.location.origin + window.location.pathname;
+      const directory = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
+      enlaceVerificacion = `${directory}verificar-matricula.html?verificar-matricula=${matricula.id}`;
+    }
+  } catch (error) {
+    // Fallback simple
+    enlaceVerificacion = `verificar-matricula.html?verificar-matricula=${matricula.id}`;
+  }
+  
+  document.getElementById('comp-enlace').textContent = enlaceVerificacion;
+  
+  // Generar código QR - VERSIÓN SIMPLIFICADA
+  const qrContainer = document.getElementById('qr-code');
+  qrContainer.innerHTML = '';
+  
+  // Solución temporal: crear un código QR básico con texto
+  qrContainer.innerHTML = `
+    <div style="border: 2px solid #ccc; padding: 15px; background: white; display: inline-block;">
+      <div style="font-family: monospace; font-size: 8px; line-height: 8px; letter-spacing: 0.5px;">
+        ${enlaceVerificacion.replace(/(.{20})/g, '$1<br>')}
+      </div>
+      <div style="margin-top: 10px; font-size: 10px; color: #666;">
+        ESCANEAR ESTE TEXTO<br>O COPIAR EL ENLACE
+      </div>
+    </div>
+  `;
+  
+  // Mostrar modal
+  const modalComprobante = new bootstrap.Modal(document.getElementById('modalComprobante'));
+  modalComprobante.show();
+  
+  // Configurar botones
+  document.getElementById('btn-copiar-enlace').onclick = function() {
+    navigator.clipboard.writeText(enlaceVerificacion).then(() => {
+      alert('Enlace copiado al portapapeles');
+    }).catch(err => {
+      console.error('Error al copiar: ', err);
+      // Fallback para navegadores antiguos
+      const tempInput = document.createElement('input');
+      tempInput.value = enlaceVerificacion;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      alert('Enlace copiado al portapapeles');
+    });
+  };
+  
+  document.getElementById('btn-imprimir-comprobante').onclick = function() {
+    window.print();
+  };
+  
+  document.getElementById('btn-enviar-correo').onclick = function() {
+    if (matricula.correo) {
+      alert(`Se enviará el comprobante al correo: ${matricula.correo}\n\nEn un sistema real, esto conectaría con un servicio de envío de correos.`);
+    } else {
+      alert('No se proporcionó un correo electrónico para enviar el comprobante.');
+    }
+  };
+}
+
+// Vista de matrículas
+function renderMatriculasTable() {
+  const tbody = document.querySelector('#matriculasTable tbody');
+  tbody.innerHTML = '';
+  const matriculas = readJSON(LS_MATRICULAS) || [];
+  
+  if (matriculas.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" class="text-center small text-muted">No hay matrículas registradas.</td></tr>';
+    return;
+  }
+  
+  matriculas.forEach(matricula => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${matricula.id.slice(-6)}</td>
+      <td>${matricula.primerNombre} ${matricula.segundoNombre || ''} ${matricula.primerApellido} ${matricula.segundoApellido || ''}</td>
+      <td>${matricula.cedula}</td>
+      <td>${matricula.telefono}</td>
+      <td>${matricula.ano}</td>
+      <td>${matricula.grupo}</td>
+      <td>${matricula.turno}</td>
+      <td>${matricula.tutorNombres} ${matricula.tutorApellidos}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1" data-action="edit" data-id="${matricula.id}" title="Editar"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-sm btn-outline-info me-1" data-action="comprobante" data-id="${matricula.id}" title="Comprobante"><i class="fa fa-file-alt"></i></button>
+        <button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${matricula.id}" title="Eliminar"><i class="fa fa-trash"></i></button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  tbody.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const action = this.getAttribute('data-action');
+      const id = this.getAttribute('data-id');
+      
+      if (action === 'edit') {
+        openEditMatriculaModal(id);
+      } else if (action === 'comprobante') {
+        const matriculas = readJSON(LS_MATRICULAS) || [];
+        const matricula = matriculas.find(m => m.id === id);
+        if (matricula) mostrarComprobante(matricula);
+      } else if (action === 'delete') {
+        if (confirm('¿Eliminar esta matrícula?')) {
+          deleteMatriculaById(id);
+          renderMatriculasTable();
+        }
+      }
+    });
+  });
+}
+
+function deleteMatriculaById(id) {
+  let matriculas = readJSON(LS_MATRICULAS) || [];
+  matriculas = matriculas.filter(m => m.id !== id);
+  writeJSON(LS_MATRICULAS, matriculas);
+}
+
+// Modal editar matrícula
+const modalEditMatricula = new bootstrap.Modal(document.getElementById('modalEditMatricula'));
+
+function openEditMatriculaModal(id) {
+  const matriculas = readJSON(LS_MATRICULAS) || [];
+  const m = matriculas.find(x => x.id === id);
+  if (!m) return alert('Matrícula no encontrada.');
+  
+  document.getElementById('edit-matricula-id').value = m.id;
+  
+  // Datos personales
+  document.getElementById('edit-p-primer-nombre').value = m.primerNombre;
+  document.getElementById('edit-p-segundo-nombre').value = m.segundoNombre || '';
+  document.getElementById('edit-p-primer-apellido').value = m.primerApellido;
+  document.getElementById('edit-p-segundo-apellido').value = m.segundoApellido || '';
+  document.getElementById('edit-p-fecha-nacimiento').value = m.fechaNacimiento;
+  document.getElementById('edit-p-edad').value = m.edad;
+  document.getElementById('edit-p-cedula').value = m.cedula;
+  document.getElementById('edit-p-direccion').value = m.direccion;
+  document.getElementById('edit-p-nacionalidad').value = m.nacionalidad;
+  document.getElementById('edit-p-telefono').value = m.telefono;
+  document.getElementById('edit-p-correo').value = m.correo || '';
+  
+  // Datos del tutor
+  document.getElementById('edit-t-nombres').value = m.tutorNombres;
+  document.getElementById('edit-t-apellidos').value = m.tutorApellidos;
+  document.getElementById('edit-t-parentesco').value = m.tutorParentesco;
+  document.getElementById('edit-t-telefono').value = m.tutorTelefono;
+  document.getElementById('edit-t-direccion').value = m.tutorDireccion;
+  
+  // Datos académicos
+  document.getElementById('edit-a-ano').value = m.ano;
+  document.getElementById('edit-a-grupo').value = m.grupo;
+  document.getElementById('edit-a-turno').value = m.turno;
+  
+  modalEditMatricula.show();
+}
+
+document.getElementById('editMatriculaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const id = document.getElementById('edit-matricula-id').value;
+  const matriculas = readJSON(LS_MATRICULAS) || [];
+  const idx = matriculas.findIndex(m => m.id === id);
+  
+  if (idx === -1) return alert('Matrícula no encontrada.');
+  
+  // Actualizar datos
+  matriculas[idx].primerNombre = document.getElementById('edit-p-primer-nombre').value.trim();
+  matriculas[idx].segundoNombre = document.getElementById('edit-p-segundo-nombre').value.trim();
+  matriculas[idx].primerApellido = document.getElementById('edit-p-primer-apellido').value.trim();
+  matriculas[idx].segundoApellido = document.getElementById('edit-p-segundo-apellido').value.trim();
+  matriculas[idx].fechaNacimiento = document.getElementById('edit-p-fecha-nacimiento').value;
+  matriculas[idx].edad = document.getElementById('edit-p-edad').value;
+  matriculas[idx].cedula = document.getElementById('edit-p-cedula').value.trim();
+  matriculas[idx].direccion = document.getElementById('edit-p-direccion').value.trim();
+  matriculas[idx].nacionalidad = document.getElementById('edit-p-nacionalidad').value.trim();
+  matriculas[idx].telefono = document.getElementById('edit-p-telefono').value.trim();
+  matriculas[idx].correo = document.getElementById('edit-p-correo').value.trim();
+  
+  matriculas[idx].tutorNombres = document.getElementById('edit-t-nombres').value.trim();
+  matriculas[idx].tutorApellidos = document.getElementById('edit-t-apellidos').value.trim();
+  matriculas[idx].tutorParentesco = document.getElementById('edit-t-parentesco').value;
+  matriculas[idx].tutorTelefono = document.getElementById('edit-t-telefono').value.trim();
+  matriculas[idx].tutorDireccion = document.getElementById('edit-t-direccion').value.trim();
+  
+  matriculas[idx].ano = document.getElementById('edit-a-ano').value;
+  matriculas[idx].grupo = document.getElementById('edit-a-grupo').value;
+  matriculas[idx].turno = document.getElementById('edit-a-turno').value;
+  
+  writeJSON(LS_MATRICULAS, matriculas);
+  modalEditMatricula.hide();
+  renderMatriculasTable();
+  alert('Matrícula actualizada correctamente.');
+});
+
+// Gestión de usuarios
+document.getElementById('userAddForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const users = readJSON(LS_USERS) || [];
+  const username = document.getElementById('u-username').value.trim();
+  
+  if (users.some(u => u.username === username)) {
+    document.getElementById('username-error').classList.remove('hidden');
+    alert('El nombre de usuario ya existe. Elija otro.');
+    return;
+  }
+  
+  const newUser = {
+    id: generateId(),
+    nombres: document.getElementById('u-nombres').value.trim(),
+    apellidos: document.getElementById('u-apellidos').value.trim(),
+    correo: document.getElementById('u-correo').value.trim(),
+    username: username,
+    password: document.getElementById('u-password').value,
+    rol: document.getElementById('u-rol').value
+  };
+  
+  users.push(newUser);
+  writeJSON(LS_USERS, users);
+  alert('Usuario agregado correctamente.');
+  this.reset();
+  document.getElementById('username-error').classList.add('hidden');
+  renderUsersTable();
+});
+
+document.getElementById('clearUserForm').addEventListener('click', function() {
+  document.getElementById('userAddForm').reset();
+  document.getElementById('username-error').classList.add('hidden');
+});
+
+function renderUsersTable() {
+  const tbody = document.querySelector('#usersTable tbody');
+  tbody.innerHTML = '';
+  const users = readJSON(LS_USERS) || [];
+  
+  if (users.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center small text-muted">No hay usuarios registrados.</td></tr>';
+    return;
+  }
+  
+  users.forEach(u => {
+    const tr = document.createElement('tr');
+    const roleBadge = u.rol === 'admin' ? 
+      '<span class="badge badge-role-admin">Administrador</span>' : 
+      '<span class="badge badge-role-assistant">Asistente</span>';
+    
+    tr.innerHTML = `
+      <td>${u.nombres}</td>
+      <td>${u.apellidos}</td>
+      <td>${u.correo}</td>
+      <td>${u.username}</td>
+      <td>${roleBadge}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1" data-action="edit" data-id="${u.id}"><i class="fa fa-pen"></i></button>
+        <button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${u.id}"><i class="fa fa-trash"></i></button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  tbody.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const action = this.getAttribute('data-action');
+      const id = this.getAttribute('data-id');
+      
+      if (action === 'edit') {
+        openEditUserModal(id);
+      } else if (action === 'delete') {
+        const currentUser = getCurrentUser();
+        const users = readJSON(LS_USERS) || [];
+        const userToDelete = users.find(u => u.id === id);
+        
+        if (userToDelete && userToDelete.username === currentUser) {
+          alert('No puedes eliminar tu propio usuario mientras estás conectado.');
+          return;
+        }
+        
+        if (confirm('¿Eliminar usuario?')) {
+          deleteUserById(id);
+          renderUsersTable();
+        }
+      }
+    });
+  });
+}
+
+function deleteUserById(id) {
+  let users = readJSON(LS_USERS) || [];
+  users = users.filter(u => u.id !== id);
+  writeJSON(LS_USERS, users);
+}
+
+// Modal editar usuario
+const modalEdit = new bootstrap.Modal(document.getElementById('modalEditUser'));
+
+function openEditUserModal(id) {
+  const users = readJSON(LS_USERS) || [];
+  const u = users.find(x => x.id === id);
+  if (!u) return alert('Usuario no encontrada.');
+  
+  document.getElementById('edit-user-id').value = u.id;
+  document.getElementById('edit-u-nombres').value = u.nombres;
+  document.getElementById('edit-u-apellidos').value = u.apellidos;
+  document.getElementById('edit-u-correo').value = u.correo;
+  document.getElementById('edit-u-username').value = u.username;
+  document.getElementById('edit-u-rol').value = u.rol;
+  document.getElementById('edit-u-password').value = '';
+  modalEdit.show();
+}
+
+document.getElementById('editUserForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const id = document.getElementById('edit-user-id').value;
+  const users = readJSON(LS_USERS) || [];
+  const idx = users.findIndex(u => u.id === id);
+  
+  if (idx === -1) return alert('Usuario no encontrada.');
+  
+  const newUsername = document.getElementById('edit-u-username').value.trim();
+  const conflict = users.some((u, i) => i !== idx && u.username === newUsername);
+  if (conflict) return alert('El nombre de usuario ya está en uso por otro registro.');
+  
+  users[idx].nombres = document.getElementById('edit-u-nombres').value.trim();
+  users[idx].apellidos = document.getElementById('edit-u-apellidos').value.trim();
+  users[idx].correo = document.getElementById('edit-u-correo').value.trim();
+  users[idx].username = newUsername;
+  users[idx].rol = document.getElementById('edit-u-rol').value;
+  
+  const newPass = document.getElementById('edit-u-password').value;
+  if (newPass) users[idx].password = newPass;
+  
+  writeJSON(LS_USERS, users);
+  modalEdit.hide();
+  renderUsersTable();
+  alert('Usuario actualizada correctamente.');
+});
+
+// Export/Import SEPARADO
+// Exportar solo matrículas
+document.getElementById('exportMatriculasBtn').addEventListener('click', function() {
+  const matriculas = readJSON(LS_MATRICULAS) || [];
+  const payload = {
+    matriculas: matriculas,
+    exported_at: new Date().toISOString(),
+    tipo: 'matriculas'
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'matriculas_export.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// Exportar solo usuarios
+document.getElementById('exportUsersBtn').addEventListener('click', function() {
+  const users = readJSON(LS_USERS) || [];
+  const payload = {
+    users: users,
+    exported_at: new Date().toISOString(),
+    tipo: 'usuarios'
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'usuarios_export.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// Importar solo matrículas
+document.getElementById('importMatriculasFile').addEventListener('change', function(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!confirm('La importación reemplazará las matrículas locales. ¿Continuar?')) {
+        e.target.value = '';
+        return;
+      }
+      
+      if (data.matriculas) {
+        writeJSON(LS_MATRICULAS, data.matriculas);
+        alert('Matrículas importadas correctamente.');
+        renderMatriculasTable();
+      } else {
+        alert('El archivo no contiene datos de matrículas válidos.');
+      }
+    } catch (err) {
+      alert('Archivo inválido: ' + err.message);
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(f);
+});
+
+// Importar solo usuarios
+document.getElementById('importUsersFile').addEventListener('change', function(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!confirm('La importación reemplazará los usuarios locales. ¿Continuar?')) {
+        e.target.value = '';
+        return;
+      }
+      
+      if (data.users) {
+        writeJSON(LS_USERS, data.users);
+        alert('Usuarios importadas correctamente.');
+        renderUsersTable();
+        updateUIForAuth();
+      } else {
+        alert('El archivo no contiene datos de usuarios válidos.');
+      }
+    } catch (err) {
+      alert('Archivo inválido: ' + err.message);
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(f);
+});
+
+// Login/Logout
+let loginModalInstance = null;
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const user = document.getElementById('login-username').value.trim();
+  const pass = document.getElementById('login-password').value;
+  
+  const userData = validateCredentials(user, pass);
+  if (!userData) {
+    alert('Credenciales inválidas.');
+    return;
+  }
+  
+  setCurrentUser(userData.username, userData.rol);
+  
+  // Cerrar el modal de login correctamente
+  if (loginModalInstance) {
+    loginModalInstance.hide();
+    // Eliminar manualmente el backdrop si persiste
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => {
+      backdrop.parentNode.removeChild(backdrop);
+    });
+    // Restaurar el scroll del body
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+  
+  updateUIForAuth();
+  this.reset();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+  if (!confirm('¿Cerrar sesión?')) return;
+  setCurrentUser(null, null);
+  updateUIForAuth();
+  
+  // Mostrar el modal de login después de cerrar sesión
+  if (loginModalInstance) {
+    loginModalInstance.show();
+  }
+});
+
+function updateUIForAuth() {
+  const logged = getCurrentUser();
+  const role = getCurrentRole();
+  
+  if (logged && role) {
+    // Mostrar contenido principal
+    document.getElementById('main-content').classList.remove('hidden');
+    document.getElementById('user-badge').textContent = logged;
+    document.getElementById('user-badge').classList.remove('hidden');
+    
+    // Configurar badge según el rol
+    if (role === 'admin') {
+      document.getElementById('role-badge').textContent = 'Administrador';
+      document.getElementById('role-badge').className = 'badge badge-role-admin';
+    } else if (role === 'assistant') {
+      document.getElementById('role-badge').textContent = 'Asistente';
+      document.getElementById('role-badge').className = 'badge badge-role-assistant';
+    }
+    document.getElementById('role-badge').classList.remove('hidden');
+    
+    // Mostrar/ocultar elementos según el rol
+    document.querySelectorAll('.role-admin').forEach(el => {
+      el.classList.add('hidden');
+    });
+    document.querySelectorAll('.role-assistant').forEach(el => {
+      el.classList.add('hidden');
+    });
+    
+    if (role === 'admin') {
+      document.querySelectorAll('.role-admin').forEach(el => {
+        el.classList.remove('hidden');
+      });
+      document.querySelectorAll('.role-assistant').forEach(el => {
+        el.classList.remove('hidden');
+      });
+      setupMenuHandlers();
+      showView('form-matricula');
+    } else if (role === 'assistant') {
+      document.querySelectorAll('.role-assistant').forEach(el => {
+        el.classList.remove('hidden');
+      });
+      setupMenuHandlers();
+      showView('form-matricula');
+    }
+    
+  } else {
+    // Ocultar contenido principal y mostrar modal de login
+    document.getElementById('main-content').classList.add('hidden');
+    document.getElementById('user-badge').classList.add('hidden');
+    document.getElementById('role-badge').classList.add('hidden');
+    
+    // Mostrar el modal de login
+    if (loginModalInstance) {
+      loginModalInstance.show();
+    }
+  }
+}
+
+// Inicialización
+function init() {
+  ensureSeedData();
+  
+  // Inicializar modal de login
+  loginModalInstance = new bootstrap.Modal(document.getElementById('loginModal'), {
+    backdrop: 'static',
+    keyboard: false
+  });
+  
+  // Configurar formulario en pasos
+  setupFormSteps();
+  
+  // Cerrar menú móvil
+  const closeMenuBtn = document.querySelector('.close-menu');
+  const navbarCollapse = document.getElementById('menuNav');
+  
+  if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', function() {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+      bsCollapse.hide();
+    });
+  }
+  
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth < 768) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        bsCollapse.hide();
+      }
+    });
+  });
+  
+  // Actualizar UI según autenticación
+  updateUIForAuth();
+}
+
+// Iniciar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLEGIO EL DIVINO SALVADOR DE A.M.E.N — Noticias</title>
+
+<!-- Bootstrap CSS -->
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+<!-- Iconos -->
+<link rel="stylesheet" href="iconos/all.min.css">
+<!-- GLightbox CSS -->
+<link rel="stylesheet" href="glbox/glightbox.min.css">
+
+<style>
+/* ======== ENCABEZADO ======== */
+header { 
+  background-color: #f8f9fa; 
+ border-bottom: 8px solid #18458A; 
+  position: relative;
+  z-index: 1000;
+  padding: 10px 0;
+
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.navbar-brand img { 
+  height: 70px;
+  width: auto;
+  
+}
+.navbar-brand span {
+  font-weight: bold;
+  margin-left: 10px;
+
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #545454 !important;
+  padding: 0.5rem 1rem;
+
+   
+}
+.navbar-nav .nav-link:hover {
+  color: #1160d6 !important;
+}
+
+/* Toggler */
+.navbar-toggler { 
+  border: none; 
+  padding: 4px 8px;
+  margin-left: auto;
+  
+  
+}
+.navbar-toggler:focus { box-shadow: none; }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  width: 1.2em; height: 1.2em;
+
+
+}
+/* ======== BANNER ======== */
+.carousel-item { position: relative; }
+.carousel-item img { height: 500px; object-fit: cover; width: 100%; }
+.carousel-item::after {
+    content: "";
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color: rgba(0, 0, 0, 0.576);
+     border-bottom: 8px solid #18458A; 
+}
+.carousel-caption { position: absolute; bottom: 20%; z-index: 2; }
+@media (max-width: 768px) { .carousel-item img { height: 300px; } }
+
+/* ======== TARJETAS HORIZONTALES ======== */
+.noticias { padding: 60px 15px; }
+.noticias h3 { font-weight: bold; margin-bottom: 30px; text-align: center; }
+
+
+.card-horizontal {
+  display: flex;
+  flex-direction: row;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.881);
+  transition: transform 0.25s ease;
+  height: 180px;
+  background: #fff;
+border-bottom: 8px solid #18458A; 
+
+}
+.card-horizontal:hover { transform: translateY(-4px); }
+
+
+.card-img-container {
+  width: 40%;
+  min-width: 40%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: #000000;
+  justify-content: center;
+  border-bottom: 8px solid #18458A; 
+
+   
+}
+.card-img-left {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+  
+
+  
+  
+}
+.card-horizontal:hover .card-img-left { transform: scale(1.03); }
+
+.card-body-horizontal {
+  width: 60%;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+.card-title-horizontal { font-weight: 600; margin-bottom: 6px; font-size: 1.05rem; line-height: 1.3; }
+.card-text-horizontal {
+  color: #272727; font-size: 0.95rem; line-height: 1.4;
+  margin-bottom: 8px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  
+}
+.btn-horizontal { align-self: flex-start; padding: 6px 12px; font-size: 0.85rem; }
+
+/* Responsivo */
+@media (max-width: 767.98px) {
+  .card-horizontal { flex-direction: column; height: auto; }
+  .card-img-container { width: 100%; height: 180px; min-width: auto; }
+  .card-body-horizontal { width: 100%; padding: 12px; }
+}
+
+/* ======== PIE DE PÁGINA ======== */
+footer { background-color: #000000; color: #fff; padding: 40px 20px; margin-top: 40px; }
+footer h5 { font-weight: bold; margin-bottom: 15px; }
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { color: #18458A; }
+.social-icons a { font-size: 1.5rem; margin: 0 10px; color: #fff; transition: color 0.3s; }
+.social-icons a:hover { color: #18458A; }
+
+/* ======== MENÚ MÓVIL ======== */
+@media (max-width: 767.98px) {
+  .navbar-brand span { display: none; }
+  .navbar-collapse {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100vh;
+    background: rgba(0,0,0,0.95);
+    padding: 2rem;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    z-index: 1040;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-collapse.show { transform: translateX(0); }
+  .navbar-nav .nav-link {
+    font-size: 1.5rem;
+    color: #fff !important;
+    padding: 10px 0;
+  }
+  .close-menu {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; color: white;
+    font-size: 1.5rem; cursor: pointer;
+    z-index: 1050;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-md p-0">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo Actual.png" alt="Colegio El Divino Salvador de A.M.E.N">
+        <span>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="menuNav">
+        <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+         <li class="nav-item"><a href="Portal academico.html" class="nav-link">Portal Académico</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- SECCIÓN NOTICIAS -->
+<main>
+     <!-- Banner Rotativo -->
+  <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="img/Banner principal 1.jpg" class="d-block w-100" alt="Banner 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Bienvenido al Colegio El Divino Salvador de A.M.E.N</h5>
+          <p>Camino, verdad, vida.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="img/Banner6.jpg" class="d-block w-100" alt="Banner 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Educación de calidad</h5>
+          <p>Comprometidos con la excelencia académica</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="img/Banner 3.jpg" class="d-block w-100" alt="Banner 3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Tú futuro comienza aquí.</h5>
+          <p>Una comunidad educativa que forma líderes con propósito y vocación de servicio.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
+  <section class="noticias container">
+    <h3>Últimas Noticias</h3>
+    <div class="row g-4">
+
+      <!-- Noticia 1 -->
+      <div class="col-12 col-md-6">
+        <div class="card-horizontal">
+          <div class="card-img-container">
+            <a href="#noticia1" class="glightbox" data-glightbox="inline:true">
+              <img src="img/noticamaestro1.jpg" class="card-img-left" alt="Noticia 1">
+            </a>
+          </div>
+          <div class="card-body-horizontal">
+            <div>
+              <h5 class="card-title-horizontal">Día del Maestro Nicaragüense</h5>
+              <p class="card-text-horizontal">Estamos implementando un innovador proyecto educativo que busca potenciar las habilidades de nuestros estudiantes.</p>
+            </div>
+            <a href="#noticia1" class="glightbox btn btn-primary btn-horizontal" data-glightbox="inline:true">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 2 -->
+      <div class="col-12 col-md-6">
+        <div class="card-horizontal">
+          <div class="card-img-container">
+            <a href="#noticia2" class="glightbox" data-glightbox="inline:true">
+              <img src="img/noticianalaticio.jpg" class="card-img-left" alt="Noticia 2">
+            </a>
+          </div>
+          <div class="card-body-horizontal">
+            <div>
+              <h5 class="card-title-horizontal">Aniversario del Natalicio  de Rubén Darío.</h5>
+              <p class="card-text-horizontal">El Colegio celebró con alegría y actividades culturales el Aniversario del Natalicio de Rubén Darío, fomentando valores y convivencia.</p>
+            </div>
+            <a href="#noticia2" class="glightbox btn btn-primary btn-horizontal" data-glightbox="inline:true">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 3 -->
+      <div class="col-12 col-md-6">
+        <div class="card-horizontal">
+          <div class="card-img-container">
+            <a href="#noticia3" class="glightbox" data-glightbox="inline:true">
+              <img src="img/sanjacinto.jpg" class="card-img-left" alt="Noticia 3">
+            </a>
+          </div>
+          <div class="card-body-horizontal">
+            <div>
+              <h5 class="card-title-horizontal">Batalla de San Jacinto y Independencia de Centroamérica.</h5>
+              <p class="card-text-horizontal">Cada 14 y 15 de septiembre celebramos con orgullo el espíritu patriótico del pueblo nicaragüense.</p>
+            </div>
+            <a href="#noticia3" class="glightbox btn btn-primary btn-horizontal" data-glightbox="inline:true">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Noticia 4 -->
+      <div class="col-12 col-md-6">
+        <div class="card-horizontal">
+          <div class="card-img-container">
+            <a href="#noticia4" class="glightbox" data-glightbox="inline:true">
+              <img src="img/premiacion.jpg" class="card-img-left" alt="Noticia 4">
+            </a>
+          </div>
+          <div class="card-body-horizontal">
+            <div>
+              <h5 class="card-title-horizontal">Premiación Estudiantes Destacados</h5>
+              <p class="card-text-horizontal">Reconocimos a los estudiantes más destacados del año por su esfuerzo académico y liderazgo</p>
+            </div>
+            <a href="#noticia4" class="glightbox btn btn-primary btn-horizontal" data-glightbox="inline:true">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- Contenido oculto GLightbox -->
+<div style="display:none;">
+  <div id="noticia1">
+    <div style="text-align:center;">
+      <img src="img/MAESTRO.jpg" style="width:100%; max-width:700px; border-radius:10px; margin-bottom:15px;">
+      <h3>Día del Maestro Nicaragüense</h3>
+      <p>Cada 29 de junio celebramos con orgullo el Día del Maestro Nicaragüense, reconociendo la noble labor de quienes con vocación, entrega y amor guían el aprendizaje de las nuevas generaciones. Su compromiso con la educación forma los cimientos de una sociedad más justa, sabia y solidaria. ¡Gracias maestros por sembrar conocimiento y esperanza en cada aula!.</p>
+    </div>
+  </div>
+  <div id="noticia2">
+    <div style="text-align:center;">
+      <img src="img/ruben.jpg" style="width:100%; max-width:700px; border-radius:10px; margin-bottom:15px;">
+      <h3>Aniversario del Natalicio  de Rubén Darío.</h3>
+      <p>Cada 18 de enero conmemoramos el natalicio de Rubén Darío, el insigne poeta nicaragüense y “Príncipe de las Letras Castellanas”. Su legado literario trasciende fronteras, inspirando a generaciones con su arte, su genialidad y su profundo amor por Nicaragua. En este día celebramos su vida, su obra y el orgullo de contar con una de las voces más brillantes de la lengua española.</p>
+    </div>
+  </div>
+  <div id="noticia3">
+    <div style="text-align:center;">
+      <img src="img/sanjacinto2.jpg" style="width:100%; max-width:700px; border-radius:10px; margin-bottom:15px;">
+      <h3>Batalla de San Jacinto y Independencia de Centroamérica.</h3>
+      <p>Batalla de San Jacinto
+Cada 14 de septiembre recordamos con orgullo la heroica Batalla de San Jacinto, símbolo de valentía y patriotismo del pueblo nicaragüense. En esta gesta histórica de 1856, un grupo de valientes liderados por el coronel José Dolores Estrada defendió la soberanía nacional frente a las fuerzas filibusteras, dejando un legado de amor a la patria y dignidad que inspira a las nuevas generaciones.
+
+Independencia de Centroamérica
+El 15 de septiembre celebramos la Independencia de Centroamérica, fecha que marcó el inicio de la libertad y la autodeterminación de nuestros pueblos. En 1821, las naciones centroamericanas proclamaron su independencia del dominio español, dando paso a una nueva etapa de identidad y unidad regional. Este día nos invita a reflexionar sobre nuestros valores, nuestra historia y el compromiso de seguir construyendo una región más justa y solidaria.</p>
+    </div>
+  </div>
+  <div id="noticia4">
+    <div style="text-align:center;">
+      <img src="img/premiacion2.jpg" style="width:100%; max-width:700px; border-radius:10px; margin-bottom:15px;">
+      <h3>Premiación Estudiantes Destacados</h3>
+      <p>Reconocemos con orgullo a nuestros estudiantes destacados por su esfuerzo, dedicación y compromiso con la excelencia académica y los valores que promueve nuestra institución. Este reconocimiento celebra no solo los logros obtenidos, sino también la constancia, la responsabilidad y el espíritu de superación que cada uno demuestra día a día. ¡Felicidades a todos por ser ejemplo e inspiración para nuestra comunidad educativa!</p>
+    </div>
+  </div>
+</div>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/TU_USUARIO" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@TU_USUARIO" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
+<!-- JS -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/glightbox.min.js"></script>
+<script>
+const lightbox = GLightbox({ selector: '.glightbox' });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const closeMenuBtn = document.querySelector('.close-menu');
+  const navbarCollapse = document.getElementById('menuNav');
+  
+  if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', function() {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+      bsCollapse.hide();
+    });
+  }
+  
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth < 768) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLEGIO EL DIVINO SALVADOR DE A.M.E.N — Boletines</title>
+
+<!-- Bootstrap CSS -->
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+<!-- Iconos -->
+<link rel="stylesheet" href="iconos/all.min.css">
+<!-- GLightbox CSS -->
+<link rel="stylesheet" href="glbox/glightbox.min.css">
+
+<style>
+/* ======== ENCABEZADO ======== */
+header { 
+  background-color: #f8f9fa; 
+  border-bottom: 5px solid #18458A; 
+  position: relative;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.navbar-brand img { 
+  height: 50px;
+  width: auto;
+}
+.navbar-brand span {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: #333 !important;
+  padding: 0.5rem 1rem;
+}
+.navbar-nav .nav-link:hover {
+  color: #007bff !important;
+}
+
+/* Toggler */
+.navbar-toggler { 
+  border: none; 
+  padding: 4px 8px;
+  margin-left: auto;
+}
+.navbar-toggler:focus { box-shadow: none; }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  width: 1.2em; height: 1.2em;
+}
+
+/* ======== BANNER ======== */
+.carousel-item {
+  position: relative;
+}
+.carousel-item img {
+  height: 500px;
+  object-fit: cover;
+  width: 100%;
+}
+.carousel-item::after {
+  content: "";
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.4);
+}
+.carousel-caption {
+  position: absolute;
+  bottom: 20%;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 300px;
+  }
+}
+
+/* ======== SECCIÓN BOLETINES ======== */
+.boletines-header {
+  background-color: #18458A;
+  color: rgb(255, 255, 255);
+  padding: 40px 0;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.boletines-container {
+  padding: 40px 0;
+}
+.boletin-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+  height: 100%;
+}
+.boletin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.boletin-img-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #6c757d, #495057);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.boletin-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+.boletin-card:hover .boletin-img {
+  transform: scale(1.05);
+}
+.pdf-icon {
+  position: absolute;
+  font-size: 4rem;
+  color: white;
+  z-index: 2;
+}
+.boletin-card-body {
+  padding: 20px;
+  background-color: white;
+}
+.boletin-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #3d3d3d;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+.boletin-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+.boletin-date {
+  display: flex;
+  align-items: center;
+}
+.boletin-date i {
+  margin-right: 5px;
+}
+.boletin-size {
+  background-color: #fffcfc;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+.boletin-description {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.boletin-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn-preview {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white;
+}
+.btn-preview:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+.btn-download {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+.btn-download:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Paginación */
+.pagination-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Filtros */
+.filtros-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.filtros-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #495057;
+}
+
+/* ======== PIE DE PÁGINA ======== */
+footer { 
+  background-color: #000000; 
+  color: #fff; 
+  padding: 40px 20px; 
+  margin-top: 60px;
+}
+footer h5 { 
+  font-weight: bold; 
+  margin-bottom: 15px; 
+}
+footer a { 
+  color: #fff; 
+  text-decoration: none; 
+}
+footer a:hover { 
+  color: #18458A; 
+}
+.social-icons a { 
+  font-size: 1.5rem; 
+  margin: 0 10px; 
+  color: #fff; 
+  transition: color 0.3s; 
+}
+.social-icons a:hover { 
+  color: #18458A; 
+}
+
+/* ======== MENÚ MÓVIL ======== */
+@media (max-width: 767.98px) {
+  .navbar-brand span { 
+    display: none; 
+  }
+  .navbar-collapse {
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 2rem;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    z-index: 1040;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-collapse.show { 
+    transform: translateX(0); 
+  }
+  .navbar-nav .nav-link {
+    font-size: 1.5rem;
+    color: #fff !important;
+    padding: 10px 0;
+  }
+  .close-menu {
+    position: absolute; 
+    top: 20px; 
+    right: 20px;
+    background: none; 
+    border: none; 
+    color: white;
+    font-size: 1.5rem; 
+    cursor: pointer;
+    z-index: 1050;
+  }
+  
+  .boletin-actions {
+    flex-direction: column;
+  }
+  .boletin-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Modal personalizado para previsualización */
+.pdf-preview-modal .modal-dialog {
+  max-width: 90%;
+  height: 90vh;
+}
+.pdf-preview-modal .modal-content {
+  height: 100%;
+}
+.pdf-preview-modal .modal-body {
+  padding: 0;
+  height: calc(100% - 60px);
+}
+.pdf-preview-modal iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-md p-0">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo Actual.png" alt="Colegio El Divino Salvador de A.M.E.N">
+        <span>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="menuNav">
+        <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Nosotros</a></li>
+          <li class="nav-item"><a href="Portal academico.html" class="nav-link">Sistema Académico</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- BANNER ROTATIVO -->
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="5000">
+      <img src="img/Banner principal 1.jpg" class="d-block w-100" alt="Banner 1">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Bienvenido al Colegio El Divino Salvador de A.M.E.N</h5>
+        <p>Camino, verdad, vida.</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="5000">
+      <img src="img/Banner 2.jpg" class="d-block w-100" alt="Banner 2">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Educación de calidad</h5>
+        <p>Formando valores, construyendo futuro.</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="5000">
+      <img src="img/Banner 3.jpg" class="d-block w-100" alt="Banner 3">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Tú futuro comienza aquí</h5>
+        <p>Una comunidad educativa que forma líderes con propósito y vocación de servicio.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
+<!-- ENCABEZADO SECCIÓN BOLETINES -->
+<section class="boletines-header">
+  <div class="container">
+    <h1>Boletines Informativos</h1>
+    <p class="lead">Consulte nuestras publicaciones con información académica.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN BOLETINES -->
+<main class="boletines-container">
+  <div class="container">
+    
+    <!-- Filtros -->
+    <div class="filtros-container">
+      <h4 class="filtros-title">Filtrar Boletines</h4>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="filtro-categoria" class="form-label">Categoría</label>
+          <select class="form-select" id="filtro-categoria">
+            <option value="todos">Todos los boletines</option>
+            <option value="academico">Académico</option>
+
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="filtro-anio" class="form-label">Año</label>
+          <select class="form-select" id="filtro-anio">
+            <option value="todos">Todos los años</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="filtro-mes" class="form-label">Mes</label>
+          <select class="form-select" id="filtro-mes">
+            <option value="todos">Todos los meses</option>
+            <option value="enero">Enero</option>
+            <option value="febrero">Febrero</option>
+            <option value="marzo">Marzo</option>
+            <option value="abril">Abril</option>
+            <option value="mayo">Mayo</option>
+            <option value="junio">Junio</option>
+            <option value="julio">Julio</option>
+            <option value="agosto">Agosto</option>
+            <option value="septiembre">Septiembre</option>
+            <option value="octubre">Octubre</option>
+            <option value="noviembre">Noviembre</option>
+            <option value="diciembre">Diciembre</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-outline-secondary" id="btn-limpiar-filtros">Limpiar filtros</button>
+        <button class="btn btn-primary" id="btn-aplicar-filtros">Aplicar filtros</button>
+      </div>
+    </div>
+
+    <!-- Grid de boletines -->
+    <div class="row" id="boletines-grid">
+      <!-- Boletín 1 -->
+      <div class="col-12 col-md-6 col-lg-3" data-categoria="academico" data-anio="2024" data-mes="marzo">
+        <div class="boletin-card">
+          <div class="boletin-img-container">
+            <img src="img/g_01.jpg" class="boletin-img" alt="Portada Boletín Marzo 2024">
+            <div class="pdf-icon">
+              <i class="far fa-file-pdf"></i>
+            </div>
+          </div>
+          <div class="boletin-card-body">
+            <h5 class="boletin-title">Boletín Académico Marzo 2024</h5>
+            <div class="boletin-meta">
+              <div class="boletin-date">
+                <i class="far fa-calendar-alt"></i> 15 Mar 2024
+              </div>
+              <div class="boletin-size">2.4 MB</div>
+            </div>
+            <p class="boletin-description">Información sobre evaluaciones parciales, actividades académicas y calendario de eventos del mes.</p>
+            <div class="boletin-actions">
+              <button class="btn btn-preview btn-sm" data-bs-toggle="modal" data-bs-target="#pdfPreviewModal" data-pdf="boletines/boletin-marzo-2024.pdf">
+                <i class="far fa-eye me-1"></i> Vista previa
+              </button>
+              <a href="boletines/boletin-marzo-2024.pdf" class="btn btn-download btn-sm" download>
+                <i class="fas fa-download me-1"></i> Descargar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Paginación -->
+    <div class="pagination-container">
+      <nav aria-label="Navegación de páginas">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<!-- Modal para previsualización de PDF -->
+<div class="modal fade pdf-preview-modal" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfPreviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pdfPreviewModalLabel">Vista previa del boletín</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe id="pdfPreviewFrame" src="" frameborder="0"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <a href="#" class="btn btn-primary" id="pdfDownloadLink" download>
+          <i class="fas fa-download me-1"></i> Descargar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/divinosalvadorde/" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@divino.salvador.a0?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/glightbox.min.js"></script>
+<script>
+// Inicializar GLightbox
+const lightbox = GLightbox({ selector: '.glightbox' });
+
+// Funcionalidad para el menú móvil
+document.addEventListener('DOMContentLoaded', function() {
+  const closeMenuBtn = document.querySelector('.close-menu');
+  const navbarCollapse = document.getElementById('menuNav');
+  
+  if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', function() {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+      bsCollapse.hide();
+    });
+  }
+  
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth < 768) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        bsCollapse.hide();
+      }
+    });
+  });
+
+  // Configurar modal de previsualización de PDF
+  const pdfPreviewModal = document.getElementById('pdfPreviewModal');
+  if (pdfPreviewModal) {
+    pdfPreviewModal.addEventListener('show.bs.modal', function(event) {
+      const button = event.relatedTarget;
+      const pdfUrl = button.getAttribute('data-pdf');
+      const pdfFrame = document.getElementById('pdfPreviewFrame');
+      const downloadLink = document.getElementById('pdfDownloadLink');
+      
+      pdfFrame.src = pdfUrl;
+      downloadLink.href = pdfUrl;
+    });
+    
+    pdfPreviewModal.addEventListener('hide.bs.modal', function() {
+      const pdfFrame = document.getElementById('pdfPreviewFrame');
+      pdfFrame.src = '';
+    });
+  }
+
+  // Funcionalidad de filtros
+  const btnAplicarFiltros = document.getElementById('btn-aplicar-filtros');
+  const btnLimpiarFiltros = document.getElementById('btn-limpiar-filtros');
+  
+  if (btnAplicarFiltros) {
+    btnAplicarFiltros.addEventListener('click', aplicarFiltros);
+  }
+  
+  if (btnLimpiarFiltros) {
+    btnLimpiarFiltros.addEventListener('click', limpiarFiltros);
+  }
+  
+  function aplicarFiltros() {
+    const categoria = document.getElementById('filtro-categoria').value;
+    const anio = document.getElementById('filtro-anio').value;
+    const mes = document.getElementById('filtro-mes').value;
+    
+    const boletines = document.querySelectorAll('#boletines-grid .col-12');
+    
+    boletines.forEach(boletin => {
+      const boletinCategoria = boletin.getAttribute('data-categoria');
+      const boletinAnio = boletin.getAttribute('data-anio');
+      const boletinMes = boletin.getAttribute('data-mes');
+      
+      let mostrar = true;
+      
+      if (categoria !== 'todos' && categoria !== boletinCategoria) {
+        mostrar = false;
+      }
+      
+      if (anio !== 'todos' && anio !== boletinAnio) {
+        mostrar = false;
+      }
+      
+      if (mes !== 'todos' && mes !== boletinMes) {
+        mostrar = false;
+      }
+      
+      if (mostrar) {
+        boletin.style.display = 'block';
+      } else {
+        boletin.style.display = 'none';
+      }
+    });
+  }
+  
+  function limpiarFiltros() {
+    document.getElementById('filtro-categoria').value = 'todos';
+    document.getElementById('filtro-anio').value = 'todos';
+    document.getElementById('filtro-mes').value = 'todos';
+    
+    const boletines = document.querySelectorAll('#boletines-grid .col-12');
+    boletines.forEach(boletin => {
+      boletin.style.display = 'block';
+    });
+  }
+});
+</script>
+</body>
+</html>

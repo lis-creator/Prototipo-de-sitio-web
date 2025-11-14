@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colegio El Divino Salvador de A.M.E.N</title>
+<!-- Bootstrap CSS -->
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+<!-- Iconos -->
+<link rel="stylesheet" href="iconos/all.min.css">
+<!-- GLightbox CSS -->
+<link rel="stylesheet" href="glbox/glightbox.min.css">
+<style>
+/* ======== ENCABEZADO ======== */
+header { 
+    background-color: #ffffff; 
+    border-bottom: 8px solid #18458A; 
+    position: relative;
+    z-index: 1000;
+    padding: 16px 0;
+  
+
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.navbar-brand img { 
+    height: 50px;
+    width: auto;
+}
+
+.navbar-brand span {
+    font-weight: bold;
+    margin-left: 10px;
+    
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #474646 !important;
+    padding: 0.5rem 1rem;
+}
+.navbar-nav .nav-link:hover {
+    color: #0b6cd2 !important;
+
+}
+
+/* Toggler */
+.navbar-toggler { 
+    border: none; 
+    padding: 4px 8px;
+    margin-left: auto;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* Estilos para móviles */
+@media (max-width: 767.98px) {
+    header .container {
+        padding: 0 15px;
+    }
+    
+    .navbar-brand {
+        flex-grow: 1;
+        max-width: calc(100% - 60px); /* Deja espacio para el botón hamburguesa */
+    }
+    
+    .navbar-brand img {
+        height: 40px; /* Logo más pequeño en móviles */
+    }
+    
+    /* OCULTAR NOMBRE DEL COLEGIO EN MÓVIL */
+    .navbar-brand span {
+        display: none;
+    }
+    
+    .navbar-toggler {
+        order: 2; /* Asegura que el botón esté a la derecha */
+        margin-left: auto;
+    }
+    
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 2rem;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+        z-index: 1040;
+        display: flex !important; /* Forzar display */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .navbar-collapse.show {
+        transform: translateX(0);
+    }
+    
+    .navbar-nav {
+        width: 100%;
+        text-align: center;
+        
+    }
+    
+    .navbar-nav .nav-item {
+        margin: 15px 0;
+    }
+    
+    .navbar-nav .nav-link {
+        font-size: 1.5rem;
+        color: #fff !important;
+        padding: 10px 0;
+       
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: #1d246f !important;
+    }
+    
+    /* Botón de cierre para móviles */
+    .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: rgb(255, 255, 255);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1050;
+    }
+    
+    /* OCULTAR LAS ÚLTIMAS 3 FOTOGRAFÍAS EN MÓVIL */
+    .galeria .row .col-md-4:nth-child(n+4) {
+        display: none;
+    }
+}
+
+/* Estilos para escritorio */
+@media (min-width: 768px) {
+    .navbar-collapse {
+        display: flex !important; /* Importante para mostrar el menú */
+    }
+    
+    .close-menu {
+        display: none; /* Ocultar botón de cierre en escritorio */
+    }
+    
+    .navbar-brand span {
+        font-size: 1.5rem;
+        display: inline; /* Asegurar que se muestre en escritorio */
+    }
+    
+    /* MOSTRAR TODAS LAS FOTOGRAFÍAS EN ESCRITORIO */
+    .galeria .row .col-md-4 {
+        display: block;
+    }
+}
+
+/* ======== BANNER ======== */
+.carousel-item { position: relative; }
+.carousel-item img { height: 500px; object-fit: cover; width: 100%; }
+.carousel-item::after {
+    content: "";
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color: rgba(9, 9, 9, 0.576);
+     border-bottom: 8px solid #18458A; 
+}
+.carousel-caption { position: absolute; bottom: 20%; z-index: 2; }
+@media (max-width: 768px) { .carousel-item img { height: 300px; } }
+
+/* ======== BIENVENIDA ======== */
+.bienvenida { text-align: center; padding: 40px 20px; }
+.bienvenida h2 { font-weight: bold; }
+.bienvenida p { font-size: 1.2rem; color: #000000c2; }
+
+/* ======== BOTONES DE ACCESO ======== */
+.accesos { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px 0; }
+.acceso-btn { 
+    flex: 1 1 250px; 
+    max-width: 300px; 
+    text-align: center; 
+    padding: 20px; 
+    border: 2px solid #090909; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: transform 0.2s ease-in-out, background-color 0.3s, color 0.3s;
+    text-decoration: none; /* Añadido para enlaces */
+    color: #000000; /* Añadido para enlaces */
+    display: flex; /* Añadido para centrar contenido */
+    align-items: center;
+    justify-content: center;
+}
+.acceso-btn:hover { 
+    transform: scale(0.95); 
+    background-color: #18458A; 
+    color: #000000; 
+    text-decoration: none; /* Asegurar que no aparezca subrayado en hover */
+}
+
+/* ======== GALERÍA ======== */
+.galeria { padding: 40px 20px; text-align: center; }
+.galeria h3 { font-weight: bold; margin-bottom: 30px; }
+.galeria img, .galeria video { width: 100%; border-radius: 15px; object-fit: cover; cursor: pointer; }
+  
+
+/* ======== PIE DE PÁGINA ======== */
+footer { background-color: #000000; color: #fffdfd; padding: 40px 20px; }
+footer h5 { font-weight: bold; margin-bottom: 15px; }
+footer a { color: #000000; text-decoration: none; }
+footer a:hover { color: #0d6efd; }
+.social-icons a { font-size: 1.5rem; margin: 0 10px; color: #ffffff; transition: color 0.3s; }
+.social-icons a:hover { color: #0d6efd; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-md p-0">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo Actual.png" alt="Colegio Divino salvador de A.M.E.N">
+        <span>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="menuNav">
+        <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+          <li class="nav-item"><a href="Portal academico.html" class="nav-link">Portal Académico</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </div> 
+</header>
+
+<main>
+  <!-- Banner Rotativo -->
+  <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="img/Banner principal 1.jpg" class="d-block w-100" alt="Banner 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Bienvenido al Colegio Divino Salvador de A.M.E.N</h5>
+          <p>Camino,verdad,Vida.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="img/Banner 2.jpg" class="d-bloc.m00" alt="Banner 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Educación de calidad</h5>
+          <p>Formando valores, construyendo futuro.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="img/Banner 3.jpg" class="d-block w-100" alt="Banner 3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Tu futuro comienza aquí.</h5>
+          <p><section id="comunidad-educativa" class="presentacion">
+
+  <p>
+    Una comunidad educativa que se especializa en la formación integral de jóvenes,
+    ofreciendo exclusivamente en el nivel de Educación Secundaria.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
+  <!-- Bienvenida -->
+  <section class="bienvenida">
+    <h2>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</h2>
+    <p>Cristo es el centro de nuestra misión educativa.</p>
+  </section>
+
+  <!-- Botones -->
+  <section class="accesos container">
+    <a href="noticias.html" class="acceso-btn">Últimas Noticias</a>
+    <a href="calendario.html" class="acceso-btn">Calendario Escolar</a>
+    <a href="boletines.html" class="acceso-btn">Boletín</a>
+  </section>
+
+  <!-- Galería -->
+  <section class="galeria container">
+    <h3></h3>
+    <div class="row g-3">
+      <div class="col-md-4"><a href="img/Galeria 1.jpg" class="glightbox" data-gallery="fotos"><img src="img/Galeria 1.jpg" alt="Foto 1"></a></div>
+      <div class="col-md-4"><a href="img/Galeria 2.jpg" class="glightbox" data-gallery="fotos"><img src="img/Galeria 2.jpg" alt="Foto 2"></a></div>
+      <div class="col-md-4"><a href="img/Galeria 3.jpg" class="glightbox" data-gallery="fotos"><img src="img/Galeria 3.jpg" alt="Foto 3"></a></div>
+      <div class="col-md-4"><a href="img/Galeria 4.jpg" class="glightbox" data-gallery="fotos"><img src="img/Galeria 4.jpg" alt="Foto 4"></a></div>
+      <div class="col-md-4"><a href="img/Galeria 5.jpg" class="glightbox" data-gallery="fotos"><img src="img/Galeria 5.jpg" alt="Foto 5"></a></div>
+      <div class="col-md-4"><a href="img/Galeria 6.jpg" class="glightbox" data-gallery="fotos"><img src="img/Galeria 6.jpg" alt="Foto 6"></a></div>
+    
+    </div>
+  </section>
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/https://www.instagram.com/divinosalvadorde/" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@https://www.tiktok.com/@divino.salvador.a0?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<!-- GLightbox JS -->
+<script src="js/glightbox.min.js"></script>
+<script>
+const lightbox = GLightbox({ selector: '.glightbox' });
+
+// Script para cerrar el menú móvil al hacer clic en un enlace
+document.addEventListener('DOMContentLoaded', function() {
+  const closeMenuBtn = document.querySelector('.close-menu');
+  const navbarCollapse = document.getElementById('menuNav');
+  
+  if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', function() {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+      });
+      bsCollapse.hide();
+    });
+  }
+  
+  // Cerrar menú al hacer clic en un enlace (solo en móviles)
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth < 768) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+          toggle: false
+        });
+        bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

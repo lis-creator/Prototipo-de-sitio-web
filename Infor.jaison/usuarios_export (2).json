@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "id": "id-g668eyw-mh98rfzw",
+      "nombres": "Administrador",
+      "apellidos": "Sistema",
+      "correo": "contacto@cColegiodivinosalvador.edu.ni",
+      "username": "admin",
+      "password": "admin123",
+      "rol": "admin"
+    },
+    {
+      "id": "id-j17kcfb-mh98rfzw",
+      "nombres": "Asistente",
+      "apellidos": "Ejemplo",
+      "correo": "contacto@cColegiodivinosalvador.edu.ni",
+      "username": "asistente",
+      "password": "asistente123",
+      "rol": "assistant"
+    },
+    {
+      "id": "id-ilsy87s-mhij6ght",
+      "nombres": "Sara",
+      "apellidos": "Verificador",
+      "correo": "saracastillocv@gmail.com",
+      "username": "director",
+      "password": "admin123",
+      "rol": "director"
+    }
+  ],
+  "exported_at": "2025-11-05T03:38:01.152Z",
+  "tipo": "usuarios"
+}

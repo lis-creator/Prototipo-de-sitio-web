@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Escolar - COLEGIO EL DIVINO SALVADOR DE A.M.E.N </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ======== ENCABEZADO ======== */
+        header {
+            background-color: #ffffff;
+            border-bottom: 5px solid #18458A;
+            position: relative;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .navbar-brand img {
+            height: 50px;
+            width: auto;
+        }
+        .navbar-brand span {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        /* Navbar links */
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            padding: 0.5rem 1rem;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #0f58c5 !important;
+        }
+        /* Toggler */
+        .navbar-toggler {
+            border: none;
+            padding: 4px 8px;
+            margin-left: auto;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            width: 1.2em;
+            height: 1.2em;
+        }
+        /* Estilos para móviles */
+        @media (max-width: 767.98px) {
+            header .container {
+                padding: 0 15px;
+            }
+            .navbar-brand {
+                flex-grow: 1;
+                max-width: calc(100% - 60px);
+            }
+            .navbar-brand img {
+                height: 40px;
+            }
+            .navbar-brand span {
+                display: none;
+            }
+            .navbar-toggler {
+                order: 2;
+                margin-left: auto;
+            }
+            .navbar-collapse {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.95);
+                padding: 2rem;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(-100%);
+                z-index: 1040;
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .navbar-collapse.show {
+                transform: translateX(0);
+            }
+            .navbar-nav {
+                width: 100%;
+                text-align: center;
+            }
+            .navbar-nav .nav-item {
+                margin: 15px 0;
+            }
+            .navbar-nav .nav-link {
+                font-size: 1.5rem;
+                color: #fff !important;
+                padding: 10px 0;
+            }
+            .navbar-nav .nav-link:hover {
+                color: #18458A!important;
+            }
+            .close-menu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                z-index: 1050;
+            }
+        }
+        /* Estilos para escritorio */
+        @media (min-width: 768px) {
+            .navbar-collapse {
+                display: flex !important;
+            }
+            .close-menu {
+                display: none;
+            }
+            .navbar-brand span {
+                font-size: 1.5rem;
+                display: inline;
+            }
+        }
+        
+        /* ======== BANNER ======== */
+        .carousel-item {
+            position: relative;
+        }
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .carousel-item::after {
+            content: "";
+            position: absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .carousel-caption {
+            position: absolute;
+            bottom: 20%;
+            z-index: 2;
+        }
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 300px;
+            }
+        }
+        
+        /* ======== SECCIÓN CALENDARIO ======== */
+        .calendario-header {
+            background-color: #18458A;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .calendario-container {
+            padding: 20px 0 40px;
+        }
+        .calendar-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #ddd;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .calendar-day-header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+        .calendar-day {
+            background-color: white;
+            padding: 10px;
+            min-height: 100px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .calendar-day:hover {
+            background-color: #f5f5f5;
+        }
+        .calendar-day.other-month {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+        .calendar-day.today {
+            background-color: #e7f3ff;
+        }
+        .calendar-day-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .calendar-event {
+            background-color: #18458A;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 2px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .calendar-event:hover {
+            background-color: #18458A;
+        }
+        .event-list {
+            margin-top: 30px;
+        }
+        .event-item {
+            padding: 10px 15px;
+            border-left: 4px solid #18458A;
+            background-color: white;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .event-item:hover {
+            transform: translateX(5px);
+        }
+        .event-date {
+            font-weight: bold;
+            color:#18458A;
+        }
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* Modal personalizado para detalles del evento */
+        .event-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .event-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .event-modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .event-modal-header {
+            background-color: #09213a;
+            color: white;
+            padding: 15px 20px;
+            position: relative;
+        }
+        .event-modal-title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .event-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .event-modal-body {
+            padding: 20px;
+        }
+        .event-modal-date {
+            font-weight: bold;
+            color: #0c0757;
+            margin-bottom: 10px;
+        }
+        .event-modal-description {
+            margin-bottom: 15px;
+        }
+        .event-modal-footer {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            text-align: right;
+        }
+        
+        /* ======== PIE DE PÁGINA ======== */
+        footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        footer h5 {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #0c0757;
+        }
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #0c0757;
+        }
+        
+        /* Botón de administración */
+        .admin-btn-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-md p-0">
+                <a class="navbar-brand" href="index.html">
+             <img src="img/Logo Actual.png" alt="Colegio El Divino Salvador de A.M.E.N">
+                    <span>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menuNav">
+                    <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <ul class="navbar-nav ms-auto text-center">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li class="nav-item"><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                        <li class="nav-item"><a href="Portal academico.html" class="nav-link">Portal Académico</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Banner Rotativo -->
+  <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+       <img src="img/Imagen1.jpg" class="d-block w-100" alt="Banner 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Bienvenido al Colegio El Divino Salvador de A.M.E.N</h5>
+          <p>Camino, Verdad, Vida.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+       <img src="img/Banner 2.jpg" class="d-bloc.m00" alt="Banner 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Educación de calidad</h5>
+          <p>Formando valores, construyendo futuro.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+       <img src="img/Banner 3.jpg" class="d-block w-100" alt="Banner 3">     <div class="carousel-caption d-none d-md-block">
+          <h5>Tú futuro comienza aquí.</h5>
+          <p>Una comunidad educativa que forma líderes con propósito y vocación de servicio.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+        <!-- Encabezado de la sección -->
+        <section class="calendario-header">
+            <div class="container">
+                <h1>Calendario Escolar</h1>
+                <p class="lead">Consulta las actividades y eventos programados para el año académico</p>
+            </div>
+        </section>
+        
+        <!-- Contenido principal del calendario -->
+        <section class="calendario-container">
+            <div class="container">
+                <div class="admin-btn-container">
+                    <a href="admin-calendario.html" class="btn btn-primary">
+                        <i class="fas fa-cog me-2"></i>Acceso a Administración
+                    </a>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Navegación del calendario -->
+                        <div class="calendar-navigation">
+                            <button id="prev-month" class="btn btn-outline-primary">
+                                <i class="fas fa-chevron-left"></i> Mes Anterior
+                            </button>
+                            <h2 id="current-month" class="calendar-title">Marzo 2024</h2>
+                            <button id="next-month" class="btn btn-outline-primary">
+                                Mes Siguiente <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Grid del calendario -->
+                        <div class="calendar-grid" id="calendar">
+                            <!-- Los días de la semana se generarán con JavaScript -->
+                        </div>
+
+                        <!-- Lista de eventos -->
+                        <div class="event-list">
+                            <h3>Próximos Eventos</h3>
+                            <div id="event-list-container">
+                                <!-- Los eventos se generarán con JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para mostrar detalles del evento -->
+    <div class="event-modal" id="event-modal">
+        <div class="event-modal-content">
+            <div class="event-modal-header">
+                <h2 class="event-modal-title" id="modal-event-title">Título del Evento</h2>
+                <button class="event-modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="event-modal-body">
+                <div class="event-modal-date" id="modal-event-date">Fecha del evento</div>
+                <div class="event-modal-type" id="modal-event-type">Tipo: Académico</div>
+                <div class="event-modal-description" id="modal-event-description">Descripción del evento...</div>
+            </div>
+            <div class="event-modal-footer">
+                <button type="button" class="btn btn-primary" id="modal-close-btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+ <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/https://www.instagram.com/divinosalvadorde/" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@https://www.tiktok.com/@divino.salvador.a0?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Clave para localStorage
+        const STORAGE_KEY = 'colegio_bautista_calendario';
+
+        // Variables globales
+        let events = [];
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        // Cargar eventos desde localStorage
+        function loadEvents() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    // Asegurarse de que todos los eventos tengan las propiedades necesarias
+                    return parsed.map(event => ({
+                        id: event.id,
+                        title: event.title || '',
+                        description: event.description || '',
+                        date: event.date,
+                        endDate: event.endDate || null,
+                        type: event.type || 'academico'
+                    }));
+                }
+            } catch (error) {
+                console.error('Error al cargar eventos:', error);
+            }
+            return []; // Si no hay datos, devolver array vacío
+        }
+
+        // Inicializar el calendario
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar eventos desde localStorage
+            events = loadEvents();
+            
+            generateCalendar(currentMonth, currentYear);
+            updateEventList();
+            
+            // Configurar navegación del calendario
+            document.getElementById('prev-month').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
+            });
+            
+            document.getElementById('next-month').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentMonth, currentYear);
+            });
+            
+            // Configurar modal
+            document.getElementById('modal-close').addEventListener('click', closeModal);
+            document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            document.getElementById('event-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // Configurar menú móvil
+            const closeMenuBtn = document.querySelector('.close-menu');
+            const navbarCollapse = document.getElementById('menuNav');
+            
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', function() {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: false
+                    });
+                    bsCollapse.hide();
+                });
+            }
+            
+            // Cerrar menú al hacer clic en un enlace (solo en móviles)
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 768) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                    }
+                });
+            });
+        });
+
+        // Función para generar el calendario
+        function generateCalendar(month, year) {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+            
+            // Actualizar título del mes
+            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ];
+            document.getElementById('current-month').textContent = `${monthNames[month]} ${year}`;
+            
+            // Crear encabezados de días de la semana
+            const dayNames = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+            dayNames.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendar.appendChild(dayHeader);
+            });
+            
+            // Obtener primer y último día del mes
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            
+            // Obtener día de la semana del primer día (0 = domingo, 6 = sábado)
+            const firstDayIndex = firstDay.getDay();
+            
+            // Obtener último día del mes anterior
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            
+            // Obtener número de días en el mes actual
+            const daysInMonth = lastDay.getDate();
+            
+            // Generar días del mes anterior
+            for (let i = firstDayIndex - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.innerHTML = `<div class="calendar-day-number">${prevMonthLastDay - i}</div>`;
+                calendar.appendChild(dayElement);
+            }
+            
+            // Generar días del mes actual
+            const today = new Date();
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayElement = document.createElement('div');
+                const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                
+                // Verificar si es el día actual
+                if (today.getDate() === i && today.getMonth() === month && today.getFullYear() === year) {
+                    dayElement.classList.add('today');
+                }
+                
+                dayElement.className = 'calendar-day';
+                dayElement.innerHTML = `<div class="calendar-day-number">${i}</div>`;
+                
+                // Agregar eventos para este día
+                const dayEvents = events.filter(event => 
+                    event.date === dateString || 
+                    (event.endDate && event.date <= dateString && event.endDate >= dateString)
+                );
+                
+                dayEvents.forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.className = 'calendar-event';
+                    eventElement.textContent = event.title;
+                    eventElement.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        showEventDetails(event.id);
+                    });
+                    dayElement.appendChild(eventElement);
+                });
+                
+                calendar.appendChild(dayElement);
+            }
+            
+            // Calcular días restantes para completar la última semana
+            const totalCells = firstDayIndex + daysInMonth;
+            const remainingCells = 42 - totalCells; // 6 semanas * 7 días = 42 celdas
+            
+            // Generar días del siguiente mes
+            for (let i = 1; i <= remainingCells; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.innerHTML = `<div class="calendar-day-number">${i}</div>`;
+                calendar.appendChild(dayElement);
+            }
+        }
+
+        // Función para actualizar la lista de eventos
+        function updateEventList() {
+            const eventListContainer = document.getElementById('event-list-container');
+            eventListContainer.innerHTML = '';
+            
+            // Ordenar eventos por fecha
+            const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            // Mostrar solo los próximos 5 eventos
+            const upcomingEvents = sortedEvents.filter(event => new Date(event.date) >= new Date());
+            
+            if (upcomingEvents.length === 0) {
+                eventListContainer.innerHTML = '<p>No hay eventos próximos programados.</p>';
+                return;
+            }
+            
+            upcomingEvents.slice(0, 5).forEach(event => {
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item';
+                
+                const eventDate = new Date(event.date);
+                const formattedDate = eventDate.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                eventItem.innerHTML = `
+                    <div class="event-date">${formattedDate}</div>
+                    <div class="event-title">${event.title}</div>
+                `;
+                
+                eventItem.addEventListener('click', function() {
+                    showEventDetails(event.id);
+                });
+                
+                eventListContainer.appendChild(eventItem);
+            });
+        }
+
+        // Función para mostrar detalles del evento en el modal
+        function showEventDetails(eventId) {
+            const event = events.find(e => e.id === eventId);
+            if (!event) return;
+            
+            // Formatear fecha(s)
+            const startDate = new Date(event.date);
+            const formattedStartDate = startDate.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            let dateText = formattedStartDate;
+            if (event.endDate) {
+                const endDate = new Date(event.endDate);
+                const formattedEndDate = endDate.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                dateText = `${formattedStartDate} - ${formattedEndDate}`;
+            }
+            
+            // Actualizar contenido del modal
+            document.getElementById('modal-event-title').textContent = event.title;
+            document.getElementById('modal-event-date').textContent = dateText;
+            document.getElementById('modal-event-type').textContent = `Tipo: ${getEventTypeText(event.type)}`;
+            document.getElementById('modal-event-description').textContent = event.description || 'Sin descripción disponible.';
+            
+            // Mostrar modal
+            document.getElementById('event-modal').classList.add('active');
+        }
+
+        // Función para obtener texto descriptivo del tipo de evento
+        function getEventTypeText(type) {
+            const typeMap = {
+                'academico': 'Académico',
+                'cultural': 'Cultural',
+                'deportivo': 'Deportivo',
+                'religioso': 'Religioso',
+                'administrativo': 'Administrativo'
+            };
+            return typeMap[type] || type;
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById('event-modal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificar Matrícula - Colegio Cristiano el Mesías</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ======== ENCABEZADO ======== */
+    header { 
+        background-color: #f8fafa; 
+        border-bottom: 6px solid #18458A; 
+        position: relative;
+        z-index: 1000;
+        padding: 15px 0;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .navbar-brand img { 
+        height: 50px;
+        width: auto;
+    }
+
+    .navbar-brand span {
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    /* Navbar links */
+    .navbar-nav .nav-link {
+        font-weight: 500;
+        color: #333 !important;
+        padding: 0.5rem 1rem;
+    }
+    .navbar-nav .nav-link:hover {
+        color: #007bff !important;
+    }
+
+    /* Toggler */
+    .navbar-toggler { 
+        border: none; 
+        padding: 4px 8px;
+        margin-left: auto;
+    }
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    /* Estilos para móviles */
+    @media (max-width: 767.98px) {
+        header .container {
+            padding: 0 15px;
+        }
+        
+        .navbar-brand {
+            flex-grow: 1;
+            max-width: calc(100% - 60px);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        /* OCULTAR NOMBRE DEL COLEGIO EN MÓVIL */
+        .navbar-brand span {
+            display: none;
+        }
+        
+        .navbar-toggler {
+            order: 2;
+            margin-left: auto;
+        }
+        
+        .navbar-collapse {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            padding: 2rem;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+            z-index: 1040;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .navbar-collapse.show {
+            transform: translateX(0);
+        }
+        
+        .navbar-nav {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .navbar-nav .nav-item {
+            margin: 15px 0;
+        }
+        
+        .navbar-nav .nav-link {
+            font-size: 1.5rem;
+            color: #ffffff !important;
+            padding: 10px 0;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+        
+        /* Botón de cierre para móviles */
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1050;
+        }
+    }
+
+    /* Estilos para escritorio */
+    @media (min-width: 768px) {
+        .navbar-collapse {
+            display: flex !important;
+        }
+        
+        .close-menu {
+            display: none;
+        }
+        
+        .navbar-brand span {
+            font-size: 1.5rem;
+            display: inline;
+        }
+    }
+
+    /* PIE DE PÁGINA */
+    footer { background-color: #000000; color: #fff; padding: 40px 20px; margin-top: 2rem; }
+    footer h5 { font-weight: bold; margin-bottom: 15px; }
+    footer a { color: #fff; text-decoration: none; }
+    footer a:hover { color: #0d6efd; }
+    .social-icons a { font-size: 1.5rem; margin: 0 10px; color: #fff; transition: color 0.3s; }
+    .social-icons a:hover { color: #0d6efd; }
+
+    /* Estilos específicos para la página de verificación */
+    .public-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .public-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .verification-result {
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .verification-success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    
+    .verification-error {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+    
+    .matricula-details {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .debug-info {
+      background-color: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    
+    .solution-box {
+      background-color: #e7f3ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-md p-0">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo Actual.png" alt="Colegio el divino salvador ">
+        <span>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="menuNav">
+        <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+          <li class="nav-item"><a href="Portal academico.html" class="nav-link">Sistema de Matrícula</a></li>
+          <li class="nav-item"><a href="verificar-matriculas.html" class="nav-link active">Verificar Matrícula</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="public-container">
+          <div class="public-header">
+            <h1>SISTEMA DE VERIFICACION DE MATRICULA</h1>
+            <p class="lead">Colegio el divino salvador de A.M.E.N</p>
+          </div>
+
+          <div class="solution-box">
+            <h6>🔄 Sincronización de Datos</h6>
+            <p class="mb-2">Para asegurar que veas las matrículas más recientes:</p>
+            <button class="btn btn-warning btn-sm" onclick="sincronizarConSistemaPrincipal()">Forzar Sincronización</button>
+            <button class="btn btn-info btn-sm ms-2" onclick="location.reload()">Recargar Página</button>
+            <button class="btn btn-outline-secondary btn-sm ms-2" onclick="abrirSistemaPrincipal()">Abrir Sistema de Matrícula</button>
+          </div>
+
+          <div class="debug-info">
+            <strong>Estado del Sistema:</strong><br>
+            <span id="systemStatus">Cargando...</span>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Verificar Matrícula</h5>
+              <p class="card-text">Ingrese el ID de matrícula para verificar su estado:</p>
+              
+              <div class="mb-3">
+                <label for="matriculaId" class="form-label">ID de Matrícula:</label>
+                <input type="text" class="form-control" id="matriculaId" placeholder="Ej: id-abc123-xyz456">
+              </div>
+              <button class="btn btn-primary" onclick="verificarMatricula()">Verificar Matrícula</button>
+              <button class="btn btn-outline-secondary ms-2" onclick="limpiarFormulario()">Limpiar</button>
+              
+              <div id="verificationResult" class="mt-4"></div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-center">
+            <a href="index.html" class="btn btn-outline-secondary">Volver al Inicio</a>
+            <a href="Portal academico.html" class="btn btn-outline-primary ms-2">Sistema de Matrícula</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/https://www.instagram.com/divinosalvadorde/" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@https://www.tiktok.com/@divino.salvador.a0?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // CONSTANTES - DEBEN COINCIDIR CON EL SISTEMA PRINCIPAL
+    const LS_MATRICULAS = 'sc_matriculas';
+
+    function sincronizarConSistemaPrincipal() {
+      console.log('🔄 Forzando sincronización...');
+      
+      // Intentar copiar datos de sessionStorage a localStorage y viceversa
+      const datosLocal = localStorage.getItem(LS_MATRICULAS);
+      const datosSession = sessionStorage.getItem(LS_MATRICULAS);
+      
+      if (datosLocal && !datosSession) {
+        sessionStorage.setItem(LS_MATRICULAS, datosLocal);
+        console.log('✅ Copiado de localStorage a sessionStorage');
+      }
+      
+      if (datosSession && !datosLocal) {
+        localStorage.setItem(LS_MATRICULAS, datosSession);
+        console.log('✅ Copiado de sessionStorage a localStorage');
+      }
+      
+      if (datosLocal && datosSession) {
+        // Si ambos tienen datos, usar los más recientes
+        const localData = JSON.parse(datosLocal);
+        const sessionData = JSON.parse(datosSession);
+        
+        // Usar el conjunto con más matrículas (asumiendo que es más actual)
+        if (localData.length >= sessionData.length) {
+          sessionStorage.setItem(LS_MATRICULAS, datosLocal);
+          console.log('✅ Usando datos de localStorage (más actualizados)');
+        } else {
+          localStorage.setItem(LS_MATRICULAS, datosSession);
+          console.log('✅ Usando datos de sessionStorage (más actualizados)');
+        }
+      }
+      
+      updateSystemStatus();
+      alert('Sincronización completada. Recarga la página para ver los cambios.');
+    }
+
+    function abrirSistemaPrincipal() {
+      window.open('sistema-academico.html', '_blank');
+    }
+
+    function updateSystemStatus() {
+      const statusElement = document.getElementById('systemStatus');
+      
+      // Leer de AMBOS almacenamientos
+      const matriculasLocal = leerDeLocalStorage();
+      const matriculasSession = leerDeSessionStorage();
+      
+      const todasMatriculas = [...new Set([...matriculasLocal, ...matriculasSession])];
+      
+      let statusHTML = `
+        <strong>Matrículas en localStorage:</strong> ${matriculasLocal.length}<br>
+        <strong>Matrículas en sessionStorage:</strong> ${matriculasSession.length}<br>
+        <strong>Total único de matrículas:</strong> ${todasMatriculas.length}<br>
+        <strong>Clave utilizada:</strong> ${LS_MATRICULAS}<br>
+      `;
+      
+      if (todasMatriculas.length > 0) {
+        statusHTML += `<strong>IDs disponibles:</strong><br>`;
+        todasMatriculas.forEach((mat, index) => {
+          statusHTML += `${index + 1}. ${mat.id}<br>`;
+        });
+      } else {
+        statusHTML += `<strong>⚠️ No hay matrículas. Ve al sistema de matrícula y crea una.</strong>`;
+      }
+      
+      statusElement.innerHTML = statusHTML;
+      
+      // Mostrar en consola para debug
+      console.log('📊 Estado actual:');
+      console.log('   localStorage:', matriculasLocal.length, 'matrículas');
+      console.log('   sessionStorage:', matriculasSession.length, 'matrículas');
+      console.log('   Total único:', todasMatriculas.length, 'matrículas');
+    }
+
+    function leerDeLocalStorage() {
+      try {
+        const datos = localStorage.getItem(LS_MATRICULAS);
+        if (!datos) return [];
+        const matriculas = JSON.parse(datos);
+        return Array.isArray(matriculas) ? matriculas : [];
+      } catch (error) {
+        console.error('Error leyendo localStorage:', error);
+        return [];
+      }
+    }
+
+    function leerDeSessionStorage() {
+      try {
+        const datos = sessionStorage.getItem(LS_MATRICULAS);
+        if (!datos) return [];
+        const matriculas = JSON.parse(datos);
+        return Array.isArray(matriculas) ? matriculas : [];
+      } catch (error) {
+        console.error('Error leyendo sessionStorage:', error);
+        return [];
+      }
+    }
+
+    function verificarMatricula() {
+      const matriculaId = document.getElementById('matriculaId').value.trim();
+      const resultDiv = document.getElementById('verificationResult');
+      
+      if (!matriculaId) {
+        resultDiv.innerHTML = `
+          <div class="verification-result verification-error">
+            <h5>Error</h5>
+            <p>Por favor, ingrese un ID de matrícula válido.</p>
+          </div>
+        `;
+        return;
+      }
+
+      console.log(`🔎 Buscando: "${matriculaId}"`);
+      
+      // Buscar en AMBOS almacenamientos
+      const matriculasLocal = leerDeLocalStorage();
+    
+      const todasMatriculas = [...matriculasLocal];
+      
+      const matricula = todasMatriculas.find(m => m.id === matriculaId);
+
+      if (matricula) {
+        resultDiv.innerHTML = `
+          <div class="verification-result verification-success">
+            <h5>✅ Matrícula Verificada Exitosamente</h5>
+            <p><strong>Estado:</strong> Matrícula activa y válida</p>
+            <p><strong>Fecha de verificación:</strong> ${new Date().toLocaleDateString('es-ES')}</p>
+            <p><strong>Fuente de datos:</strong> ${matriculasLocal.includes(matricula) ? 'localStorage' : 'sessionStorage'}</p>
+          </div>
+          <div class="matricula-details">
+            <h6>Datos del Estudiante:</h6>
+            <p><strong>Nombre completo:</strong> ${matricula.primerNombre} ${matricula.segundoNombre || ''} ${matricula.primerApellido} ${matricula.segundoApellido || ''}</p>
+            <p><strong>Cédula:</strong> ${matricula.cedula}</p>
+            <p><strong>Fecha de Nacimiento:</strong> ${new Date(matricula.fechaNacimiento).toLocaleDateString('es-ES')}</p>
+            <p><strong>Edad:</strong> ${matricula.edad} años</p>
+            <p><strong>Dirección:</strong> ${matricula.direccion}</p>
+            <p><strong>Teléfono:</strong> ${matricula.telefono}</p>
+            ${matricula.correo ? `<p><strong>Correo electrónico:</strong> ${matricula.correo}</p>` : ''}
+            
+            <h6 class="mt-3">Datos Académicos:</h6>
+            <p><strong>Año:</strong> ${matricula.ano}</p>
+            <p><strong>Grupo:</strong> ${matricula.grupo}</p>
+            <p><strong>Turno:</strong> ${matricula.turno}</p>
+            <p><strong>Fecha de Matrícula:</strong> ${new Date(matricula.fechaMatricula).toLocaleDateString('es-ES')}</p>
+            
+            <h6 class="mt-3">Datos del Tutor:</h6>
+            <p><strong>Nombre completo:</strong> ${matricula.tutorNombres} ${matricula.tutorApellidos}</p>
+            <p><strong>Parentesco:</strong> ${matricula.tutorParentesco}</p>
+            <p><strong>Teléfono:</strong> ${matricula.tutorTelefono}</p>
+            <p><strong>Dirección:</strong> ${matricula.tutorDireccion}</p>
+          </div>
+          <div class="mt-3 text-center">
+            <small class="text-muted">ID de verificación: ${matricula.id}</small>
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="verification-result verification-error">
+            <h5>❌ Matrícula No Encontrada</h5>
+            <p>El ID de matrícula <strong>"${matriculaId}"</strong> no existe en nuestros registros.</p>
+            <div class="solution-box">
+              <h6>Pasos para solucionar:</h6>
+              <ol>
+                <li>Haz clic en <strong>"Forzar Sincronización"</strong></li>
+                <li>Luego en <strong>"Recargar Página"</strong></li>
+                <li>Si no funciona, haz clic en <strong>"Abrir Sistema de Matrícula"</strong> y crea una nueva matrícula</li>
+                <li>Vuelve a esta página y repite los pasos 1 y 2</li>
+              </ol>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function limpiarFormulario() {
+      document.getElementById('matriculaId').value = '';
+      document.getElementById('verificationResult').innerHTML = '';
+    }
+
+    // Verificación automática desde URL
+    function checkUrlForVerification() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const matriculaIdFromUrl = urlParams.get('verificar-matricula');
+      
+      if (matriculaIdFromUrl) {
+        document.getElementById('matriculaId').value = matriculaIdFromUrl;
+        setTimeout(() => verificarMatricula(), 500);
+      }
+    }
+
+    // Ejecutar al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🚀 Página de verificación cargada');
+      updateSystemStatus();
+      checkUrlForVerification();
+    });
+</script>
+</body>
+</html>

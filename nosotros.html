@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros - COLEGIO EL DIVINO SALVADOR DE A.M.E.N</title>
+<!-- Bootstrap CSS -->
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+<!-- Iconos -->
+<link rel="stylesheet" href="iconos/all.min.css">
+<!-- GLightbox CSS -->
+<link rel="stylesheet" href="glbox/glightbox.min.css">
+<style>
+/* ======== ENCABEZADO ======== */
+header { 
+    background-color: #f8f9fa; 
+  border-bottom: 8px solid #18458A; 
+    position: relative;
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.navbar-brand img { 
+    height: 50px;
+    width: auto;
+}
+
+.navbar-brand span {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #333 !important;
+    padding: 0.5rem 1rem;
+}
+.navbar-nav .nav-link:hover {
+    color: #007bff !important;
+}
+
+/* Toggler */
+.navbar-toggler { 
+    border: none; 
+    padding: 4px 8px;
+    margin-left: auto;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* Estilos para móviles */
+@media (max-width: 767.98px) {
+    header .container {
+        padding: 0 15px;
+    }
+    
+    .navbar-brand {
+        flex-grow: 1;
+        max-width: calc(100% - 60px); /* Deja espacio para el botón hamburguesa */
+    }
+    
+    .navbar-brand img {
+        height: 40px; /* Logo más pequeño en móviles */
+    }
+    
+    /* OCULTAR NOMBRE DEL COLEGIO EN MÓVIL */
+    .navbar-brand span {
+        display: none;
+    }
+    
+    .navbar-toggler {
+        order: 2; /* Asegura que el botón esté a la derecha */
+        margin-left: auto;
+    }
+    
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.95);
+        padding: 2rem;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+        z-index: 1040;
+        display: flex !important; /* Forzar display */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .navbar-collapse.show {
+        transform: translateX(0);
+    }
+    
+    .navbar-nav {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .navbar-nav .nav-item {
+        margin: 15px 0;
+    }
+    
+    .navbar-nav .nav-link {
+        font-size: 1.5rem;
+        color: #fffbfb !important;
+        padding: 10px 0;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: #18458A !important;
+    }
+    
+    /* Botón de cierre para móviles */
+    .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: rgb(0, 0, 0);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1050;
+    }
+}
+
+/* Estilos para escritorio */
+@media (min-width: 768px) {
+    .navbar-collapse {
+        display: flex !important; /* Importante para mostrar el menú */
+    }
+    
+    .close-menu {
+        display: none; /* Ocultar botón de cierre en escritorio */
+    }
+    
+    .navbar-brand span {
+        font-size: 1.5rem;
+        display: inline; /* Asegurar que se muestre en escritorio */
+    }
+}
+
+/* ======== BANNER ======== */
+.carousel-item { position: relative; }
+.carousel-item img { height: 400px; object-fit: cover; width: 100%; }
+.carousel-item::after {
+    content: "";
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color: rgba(5, 5, 5, 0.4);
+    border-bottom: 8px solid #18458A;
+}
+.carousel-caption { position: absolute; bottom: 20%; z-index: 2; }
+@media (max-width: 768px) { .carousel-item img { height: 300px; } }
+
+/* ======== SECCIÓN NOSOTROS ======== */
+.nosotros-hero {
+    background: linear-gradient(#18458A, #18458A), url('img/nosotros_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.nosotros-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.nosotros-hero p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Secciones de contenido */
+.nosotros-seccion {
+    padding: 60px 0;
+    background-color: #ffffffa3;
+}
+
+.nosotros-seccion:nth-child(even) {
+    background-color: #18458A;
+}
+
+.nosotros-seccion h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #020202;
+}
+
+.nosotros-seccion p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #000000;
+}
+
+/* Tarjetas de valores */
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.valor-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(7, 18, 70, 0.733);
+    transition: transform 0.3s ease;
+}
+
+.valor-card:hover {
+    transform: translateY(-10px);
+}
+
+.valor-card i {
+    font-size: 3rem;
+    color: #18458A;
+    margin-bottom: 20px;
+}
+
+.valor-card h3 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.valor-card p {
+    color: #666;
+}
+
+/* Historia */
+.historia-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.historia-text {
+    flex: 1;
+   
+}
+
+.historia-imagen {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.412);
+}
+
+.historia-imagen img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .historia-content {
+        flex-direction: column;
+    }
+    
+    .nosotros-hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* ======== PIE DE PÁGINA ======== */
+footer { background-color: #000000; color: #fff; padding: 40px 20px; }
+footer h5 { font-weight: bold; margin-bottom: 15px; }
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { color: #0d6efd; }
+.social-icons a { font-size: 1.5rem; margin: 0 10px; color: #fff; transition: color 0.3s; }
+.social-icons a:hover { color: #0d6efd; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-md p-0">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo Actual.png" alt="Colegio Divino salvador de A.M.E.N">
+        <span>COLEGIO EL DIVINO SALVADOR DE A.M.E.N</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="menuNav">
+        <button class="close-menu d-md-none" type="button" aria-label="Cerrar menú">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link active">Nosotros</a></li>
+         <li class="nav-item"><a href="Portal academico.html" class="nav-link">Portal Académico</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="img/Banner principal 1.jpg" class="d-block w-100" alt="Banner 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Bienvenido al colegio divino salvador de A.M.E.N</h5>
+          <p>Camino,verdad,Vida.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="img/Banner 2.jpg" class="d-block w-100" alt="Banner 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Educación de calidad</h5>
+          <p>Formando valores, construyendo futuro.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="img/banner_04.jpg" class="d-block w-100" alt="Banner 3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Tu futuro comienza aquí.</h5>
+          <p>Una comunidad educativa que forma líderes con propósito y vocación de servicio.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+  <!-- Banner Hero -->
+  <section class="nosotros-hero">
+    <div class="container">
+      <h1>Sobre Nosotros</h1>
+      <p>El Colegio El Divino Salvador A.M.E.N., fue fundado en el año 2004, es una institución educativa cristiana que promueve la excelencia académica y la formación en valores. Bajo el lema “Camino, verdad y vida”, guiamos a nuestros estudiantes en su desarrollo integral: académico, personal y espiritual, para que se conviertan en ciudadanos responsables y con principios sólidos.</p>
+    </div>
+  </section>
+
+  <!-- Misión -->
+  <section class="nosotros-seccion">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h2>Nuestra Misión</h2>
+          <p>Ser una institución educativa que promueve el éxito de las familias de Ciudad Sandino, a través de valores cristianos y altos estándares académicos, fomentando la unidad, la colaboración y la excelencia en un ambiente de fe y conocimiento.</p>
+        </div>
+        <div class="col-md-6">
+          <div class="historia-imagen">
+            <img src="img/Mision .jpg" alt="Nuestra Misión">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visión -->
+  <section class="nosotros-seccion">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 order-md-2">
+          <h2>Nuestra Visión</h2>
+          <p>Ser una institución educativa líder en formación integral, destacada por la capacitación tecnológica, científica y espiritual, que transforme a los estudiantes en discípulos comprometidos con Dios y con el servicio como estilo de vida.</p>
+        </div>
+        <div class="col-md-6 order-md-1">
+          <div class="historia-imagen">
+            <img src="img/Vision.jpg" alt="Nuestra Visión">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="nosotros-seccion">
+    <div class="container">
+      <h2>Principios Institucionales</h2>
+      <div class="valores-grid">
+        <div class="valor-card">
+          <i class="fas fa-heart"></i>
+          <h3>Amor</h3>
+          <p>El amor guía nuestra misión. Fomentamos respeto, empatía y solidaridad para que cada miembro se sienta valorado. Enseñamos que amar es servir, comprender, perdonar y convivir en armonía.</p>
+        </div>
+        <div class="valor-card">
+          <i class="fas fa-handshake"></i>
+          <h3>Integridad</h3>
+          <p>Actuamos con coherencia y rectitud. La integridad guía nuestro comportamiento y enseñamos a nuestros estudiantes a tomar decisiones éticas, fieles a los principios cristianos.</p>
+        </div>
+        <div class="valor-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Excelencia</h3>
+          <p>La excelencia es nuestro compromiso constante. Ofrecemos una educación de calidad que potencia las competencias académicas, emocionales y espirituales, formando personas críticas, creativas y comprometidas con su entorno.</p>
+        </div>
+        <div class="valor-card">
+          <i class="fas fa-users"></i>
+          <h3>Respeto</h3>
+          <p>Valoramos la dignidad de cada persona. El respeto guía nuestra convivencia, promoviendo la cortesía, la tolerancia y la aceptación de las diferencias como oportunidad de crecimiento.</p>
+        </div>
+        <div class="valor-card">
+          <i class="fas fa-star"></i>
+          <h3>Responsabilidad</h3>
+          <p>La responsabilidad es clave para la vida personal y social. Promovemos el compromiso, la puntualidad y la honestidad como camino hacia la madurez y el logro de metas.</p>
+        </div>
+        <div class="valor-card">
+          <i class="fas fa-hands-helping"></i>
+          <h3>Servicio</h3>
+          <p>Educar para servir es nuestra prioridad. Formamos líderes generosos y humildes, comprometidos con la comunidad y guiados por la vocación cristiana.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia -->
+  <section class="nosotros-seccion">
+    <div class="container">
+      <h2>Nuestra Historia</h2>
+      <div class="historia-content">
+        <div class="historia-text">
+          <p>Fundado en 2004, el Colegio El Divino Salvador A.M.E.N. se ha consolidado como una institución comprometida con la formación integral de sus estudiantes, basada en la excelencia académica y los valores cristianos. Desde sus inicios, ha sido un espacio donde la fe y el conocimiento se unen para construir un futuro lleno de esperanza, formando generaciones con sólidos valores, espíritu de servicio y amor al prójimo.</p>
+          <p></p>
+          <p>Hoy, el Colegio El Divino Salvador A.M.E.N. continúa fortaleciendo su misión educativa, integrando la innovación tecnológica y nuevas metodologías de enseñanza, sin apartarse de los valores cristianos que han sido el pilar de su identidad institucional. Con fe, amor y dedicación, seguimos formando líderes íntegros preparados para servir a Dios y a la sociedad.</p>
+        </div>
+        <div class="historia-imagen">
+          <img src="img/Historia.jpg" alt="Nuestra Historia">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>Contacto</h5>
+        <p><i class="fa-solid fa-envelope"></i> contacto@cColegiodivinosalvador.edu.ni</p>
+        <p><i class="fa-solid fa-phone"></i> +505 2293 5109</p>
+        <p><i class="fa-solid fa-location-dot"></i> Managua, Nicaragua</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Mapa de Ubicación</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.4766771204677!2d-86.34929252493728!3d12.147916388096831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71515061cc78a1%3A0xdcd69866a7397032!2sColegio%20Divino%20Salvador!5e0!3m2!1ses-419!2sni!4v1759945659266!5m2!1ses-419!2sni" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Redes Sociales</h5>
+       <div class="social-icons">
+  <a href="https://www.facebook.com/eldivinosalvador2014?locale=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/divinosalvadorde/" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.tiktok.com/@divino.salvador.a0?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<!-- GLightbox JS -->
+<script src="js/glightbox.min.js"></script>
+<script>
+const lightbox = GLightbox({ selector: '.glightbox' });
+
+// Script para cerrar el menú móvil al hacer clic en un enlace
+document.addEventListener('DOMContentLoaded', function() {
+  const closeMenuBtn = document.querySelector('.close-menu');
+  const navbarCollapse = document.getElementById('menuNav');
+  
+  if (closeMenuBtn) {
+    closeMenuBtn.addEventListener('click', function() {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+      });
+      bsCollapse.hide();
+    });
+  }
+  
+  // Cerrar menú al hacer clic en un enlace (solo en móviles)
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth < 768) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+          toggle: false
+        });
+        bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

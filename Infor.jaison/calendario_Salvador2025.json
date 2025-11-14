@@ -1,0 +1,794 @@
+[
+  {
+    "id": 1,
+    "title": "inicio de año",
+    "description": "",
+    "date": "2025-01-01",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 2,
+    "title": "Dia internacional de la educación.",
+    "description": "",
+    "date": "2025-01-11",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 3,
+    "title": "158 Aniversario del natalicio de Rubén Darío.",
+    "description": "",
+    "date": "2025-01-18",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 4,
+    "title": "Inicio de labores de directores y subdirectores y personal administrativo.",
+    "description": "",
+    "date": "2025-01-07",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 5,
+    "title": "I momento de capacitación a Nivel Departamental y municipal",
+    "description": "",
+    "date": "2025-01-13",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 6,
+    "title": "I Capacitación a nivel de centros educativos ,Magisterio Nacional.",
+    "description": "EPI",
+    "date": "2025-01-18",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 7,
+    "title": "Inicio de clases en modalidad regular 2025.",
+    "description": "",
+    "date": "2025-02-01",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 8,
+    "title": "Encuentro semenstrales Creciendo en Valores.",
+    "description": "",
+    "date": "2025-02-05",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 9,
+    "title": "Encuentro bimestrales de intercambio Familiar.",
+    "description": "",
+    "date": "2025-02-27",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 10,
+    "title": "II encuentro pedagógico de interaprendizaje.",
+    "description": "",
+    "date": "2025-02-28",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 11,
+    "title": "109 Aniversario del transito a la inmortalidad.",
+    "description": "Aniversario a la inmortalidad de Rubén diario ,Príncipe de las letras castellanas",
+    "date": "2025-02-06",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 12,
+    "title": "91 Aniversario del transito a la inmortalidad de A. Cesar Sandino",
+    "description": "Hombre y mujeres libres",
+    "date": "2025-02-21",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 13,
+    "title": "Dia internacional de los escritores.",
+    "description": "",
+    "date": "2025-03-03",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 14,
+    "title": "Día de la mujer Nicaragüense.",
+    "description": "",
+    "date": "2025-03-08",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 15,
+    "title": "Día internacional del síndrome de Down.",
+    "description": "",
+    "date": "2025-03-21",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 16,
+    "title": "Día  internacional de la poesía.",
+    "description": "",
+    "date": "2025-03-21",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 17,
+    "title": "45 aniversario ¨De la Gran Cruzada Nacional de alfabetización Héroes y Mártires por la Liberación Nacional  ¨.",
+    "description": "",
+    "date": "2025-03-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 18,
+    "title": "Encuentro semanal de creciendo en valores.",
+    "description": "",
+    "date": "2025-03-05",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 19,
+    "title": "III encuentro pedagógico de interaprendizaje.",
+    "description": "",
+    "date": "2025-03-28",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 20,
+    "title": "I Primer corte Evaluativo Secundaria a Distancia en el campo.",
+    "description": "",
+    "date": "2025-03-29",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 21,
+    "title": "Dia mundial del Teatro.",
+    "description": "",
+    "date": "2025-03-27",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 22,
+    "title": "Día Internacional de la Madre Tierra.",
+    "description": "",
+    "date": "2025-04-22",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 23,
+    "title": "Día Internacional del Libro.",
+    "description": "",
+    "date": "2025-04-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 24,
+    "title": "Día Internacional de la Danza.",
+    "description": "",
+    "date": "2025-04-29",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 25,
+    "title": "Encuentros Bimestrales de Intercambio Familiar.",
+    "description": "",
+    "date": "2025-04-24",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 26,
+    "title": "Día Internacional de la Concienciación sobre el Autismo.",
+    "description": "",
+    "date": "2025-04-02",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 27,
+    "title": "Día Internacional de la Ciencia y la Tecnología.",
+    "description": "",
+    "date": "2025-04-10",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 28,
+    "title": "Día del Deportista Nicaragüense.",
+    "description": "",
+    "date": "2025-04-19",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 29,
+    "title": "IV Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-04-25",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 30,
+    "title": "Día Internacional de los Trabajadores.",
+    "description": "",
+    "date": "2025-05-01",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 31,
+    "title": "Dia Internacional del Reciclaje.",
+    "description": "",
+    "date": "2025-05-17",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 32,
+    "title": "130 Aniversario del Natalicio del General de Hombres y Mujeres Libres, Augusto C. Sandino.",
+    "description": "",
+    "date": "2025-05-18",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 33,
+    "title": "Dia Internacional de la Diversidad Biológica.",
+    "description": "",
+    "date": "2025-05-22",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 34,
+    "title": "Día de la Madre Nicaragüense.",
+    "description": "",
+    "date": "2025-05-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 35,
+    "title": "Fiesta del Tulululu.",
+    "description": "",
+    "date": "2025-05-31",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 36,
+    "title": "V Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-07-29",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 37,
+    "title": "VII Corte Evaluativo EPI",
+    "description": "",
+    "date": "2025-06-27",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 38,
+    "title": "Día del Niño y la Niña.",
+    "description": "",
+    "date": "2025-06-01",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 39,
+    "title": "Dia Internacional del Medio Ambiente.",
+    "description": "",
+    "date": "2025-06-05",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 40,
+    "title": "Dia Nacional de la Música.",
+    "description": "",
+    "date": "2025-06-21",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 41,
+    "title": "Dia del Padre Nicaragüense.",
+    "description": "",
+    "date": "2025-06-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 42,
+    "title": "89 Aniversario del Natalicio del Comandante en Jefe de la Revolución Popular Sandinista, Carlos Fonseca Amador.",
+    "description": "",
+    "date": "2025-06-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 43,
+    "title": "Dia Internacional de la Persona Sordociega.",
+    "description": "",
+    "date": "2025-06-27",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 44,
+    "title": "170 Aniversario de la Gesta Heroica de Enmanuel Mongalo y Rubio.",
+    "description": "",
+    "date": "2025-06-29",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 45,
+    "title": "Dia del Maestro/a Nicaragüense.",
+    "description": "",
+    "date": "2025-06-29",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 46,
+    "title": "I Momento de Capacitación Nacional, dirigida asesores pedagógicos nacionales, departamentales y municipales.",
+    "description": "",
+    "date": "2025-06-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 47,
+    "title": "Encuentros Bimestrales de Intercambio Familiar.",
+    "description": "",
+    "date": "2025-06-26",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 48,
+    "title": "VI Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-06-27",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 49,
+    "title": "Encuentros Semanales Creciendo en Valores.",
+    "description": "",
+    "date": "2025-06-04",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 50,
+    "title": "EPI",
+    "description": "",
+    "date": "2025-06-21",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 51,
+    "title": "46 Aniversario del Triunfo de la Revolución Popular Sandinista.",
+    "description": "",
+    "date": "2025-07-19",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 52,
+    "title": "Dia del Estudiante Nicaragüense.",
+    "description": "",
+    "date": "2025-07-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 53,
+    "title": "137 Aniversario de la Publicación de la obra Azul, de Rubén Darío.",
+    "description": "",
+    "date": "2025-07-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 54,
+    "title": "Encuentros Semanales de Creciendo en Valores",
+    "description": "",
+    "date": "2025-07-27",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 55,
+    "title": "Receso intersemestral de los estudiantes de Modalidad Regular",
+    "description": "",
+    "date": "2025-07-14",
+    "endDate": "2025-07-28",
+    "type": "academico"
+  },
+  {
+    "id": 56,
+    "title": "Inicio de clases del Semestre Modalidad Regular y Multigrado.",
+    "description": "",
+    "date": "2025-07-28",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 57,
+    "title": "VII Encuentro Pedagógico de Interprendizaje.",
+    "description": "",
+    "date": "2025-07-25",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 58,
+    "title": "45 Aniversario del Cierre de “la Gran Cruzada Nacional de Alfabetización Héroes y Mártires por la Liberación de Nicaragua\".",
+    "description": "",
+    "date": "2025-08-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 59,
+    "title": "Día Internacional de los Pueblos Indígenas.",
+    "description": "",
+    "date": "2025-08-09",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 60,
+    "title": "Día Nacional de las Personas con Discapacidad.",
+    "description": "",
+    "date": "2025-08-25",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 61,
+    "title": "Inicio de clases del 11 Semestre Modalidad Primaria y Secundaria a Distancia en el Campo y Secundaria por Encuentros de EDJA.",
+    "description": "",
+    "date": "2025-08-02",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 62,
+    "title": "Desfiles escolares por Centro Educativo con estudiantes de Primaria y Secundaria, en saludo a las Fiestas Patrias.",
+    "description": "",
+    "date": "2025-08-28",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 63,
+    "title": "Encuentros Bimestrales de Intercambio Familiar.",
+    "description": "",
+    "date": "2025-08-29",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 64,
+    "title": "Vill Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-08-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 65,
+    "title": "Día Internacional de la Alfabetización.",
+    "description": "",
+    "date": "2025-09-08",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 66,
+    "title": "Día Nacional del Huipil Nicaragúense.",
+    "description": "",
+    "date": "2025-09-08",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 67,
+    "title": "169 Aniversario de la Batalla de San Jacinto.",
+    "description": "",
+    "date": "2025-09-14",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 68,
+    "title": "204 Aniversario de la Firma del Acta de la Independencia de Centro América.",
+    "description": "",
+    "date": "2025-09-15",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 69,
+    "title": "Día Internacional por la Paz.",
+    "description": "",
+    "date": "2025-09-21",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 70,
+    "title": "Día Internacional de las Lenguas de Señas.",
+    "description": "",
+    "date": "2025-09-23",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 71,
+    "title": "Día Nacional del Maíz.",
+    "description": "",
+    "date": "2025-09-26",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 72,
+    "title": "Encuentros Semanales Creciendo en Valores.",
+    "description": "",
+    "date": "2025-09-10",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 73,
+    "title": "Desfiles escolares por Centro Educativo con estudiantes de Primaria y Secundaria, en saludo a las Fiestas Patrias.",
+    "description": "",
+    "date": "2025-10-06",
+    "endDate": "2025-09-13",
+    "type": "academico"
+  },
+  {
+    "id": 74,
+    "title": "Il! Corte Evaluativo para Modalidad Regular y Multigrado.",
+    "description": "",
+    "date": "2025-09-23",
+    "endDate": "2025-09-30",
+    "type": "academico"
+  },
+  {
+    "id": 75,
+    "title": "IX Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-09-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 76,
+    "title": "Encuentros Bimestrales de Intercambio Familiar",
+    "description": "",
+    "date": "2025-10-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 77,
+    "title": "146 Aniversario del Natalicio del  General Benjamín Zeledón.",
+    "description": "",
+    "date": "2025-10-04",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 78,
+    "title": "Encuentros Semanales Creciendo en Valores.",
+    "description": "",
+    "date": "2025-10-15",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 79,
+    "title": "Día de la Resistencia Indígena, Negra y Popular.",
+    "description": "",
+    "date": "2025-10-12",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 80,
+    "title": "Día de la Integración Centroamericana.",
+    "description": "",
+    "date": "2025-10-14",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 81,
+    "title": "Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-10-31",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 82,
+    "title": "Día Internacional del Lavado de Manos.",
+    "description": "",
+    "date": "2025-10-15",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 83,
+    "title": "Día Internacional de la Alimentación.",
+    "description": "",
+    "date": "2025-10-16",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 84,
+    "title": "Día de la Autonomía de las Regiones de la Costa Caribe Nicaragúense.",
+    "description": "",
+    "date": "2025-10-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 85,
+    "title": "Ill Corte Evaluativo Primaria y Secundaria",
+    "description": "",
+    "date": "2025-10-04",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 86,
+    "title": "IV Corte Evaluativo para undécimo grado de secundaria",
+    "description": "",
+    "date": "2025-11-08",
+    "endDate": "2025-11-15",
+    "type": "academico"
+  },
+  {
+    "id": 87,
+    "title": "Día de los Difuntos.",
+    "description": "",
+    "date": "2025-11-02",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 88,
+    "title": "Día de la / el Bibliotecario Nicaragúense.",
+    "description": "",
+    "date": "2025-11-08",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 89,
+    "title": "49 Aniversario del Tránsito a la Inmortalidad  del Comandante en Jefe de la Revolución Popular Sandinista, Carlos Fonseca Amador.",
+    "description": "",
+    "date": "2025-11-08",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 90,
+    "title": "Día del Músico Nicaragüense.",
+    "description": "",
+    "date": "2025-11-22",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 91,
+    "title": "Encuentros Semanales Creciendo en Valores.",
+    "description": "",
+    "date": "2025-11-19",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 92,
+    "title": "IV Corte Evaluativo de estudiantes de undécimo grado de Secundaria a Distancia en el Campo",
+    "description": "",
+    "date": "2025-11-15",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 93,
+    "title": "X Encuentro Pedagógico de Interaprendizaje.",
+    "description": "",
+    "date": "2025-11-28",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 94,
+    "title": "Último día de clase.",
+    "description": "",
+    "date": "2025-11-30",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 95,
+    "title": "Promociones de estudiantes de Educación  secundaria 11* grado.",
+    "description": "",
+    "date": "2025-12-04",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 96,
+    "title": "Entrega de boletines",
+    "description": "",
+    "date": "2025-12-01",
+    "endDate": "2025-12-02",
+    "type": "academico"
+  },
+  {
+    "id": 97,
+    "title": "Vacaciones personal docente Feriado Nacional",
+    "description": "",
+    "date": "2025-12-05",
+    "endDate": "2025-12-31",
+    "type": "academico"
+  },
+  {
+    "id": 98,
+    "title": "Día de los Derechos Humanos.",
+    "description": "",
+    "date": "2025-12-08",
+    "endDate": null,
+    "type": "academico"
+  },
+  {
+    "id": 99,
+    "title": "Día Internacional de las Personas Ciegas.",
+    "description": "",
+    "date": "2025-12-13",
+    "endDate": null,
+    "type": "academico"
+  }
+]
